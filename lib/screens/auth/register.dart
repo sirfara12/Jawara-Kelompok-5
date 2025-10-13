@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jawara_pintar_kel_5/constants/constant_colors.dart';
 import 'package:jawara_pintar_kel_5/widget/login_button.dart';
+import 'package:jawara_pintar_kel_5/widget/text_input_login.dart';
 import 'package:moon_design/moon_design.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -78,7 +79,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       ),
       body: Padding(
-        padding: const EdgeInsets.only(top: 4.0, bottom: 16.0),
+        padding: const EdgeInsets.only(top: 4.0, bottom: 24.0),
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.only(right: 24, left: 24),
@@ -95,12 +96,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 inputGroup(
                   title: 'Identitas',
                   children: [
-                    textInput(
+                    TextInputLogin(
                       controller: _namaController,
                       hint: 'Nama Lengkap',
                       keyboardType: TextInputType.name,
                     ),
-                    textInput(
+                    TextInputLogin(
                       controller: _nikController,
                       hint: 'NIK',
                       keyboardType: TextInputType.number,
@@ -175,17 +176,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 inputGroup(
                   title: 'Akun',
                   children: [
-                    textInput(
+                    TextInputLogin(
                       controller: _emailController,
                       hint: 'Email',
                       keyboardType: TextInputType.emailAddress,
                     ),
-                    textInput(
+                    TextInputLogin(
                       controller: _phoneController,
                       hint: 'No Telepone',
                       keyboardType: TextInputType.phone,
                     ),
-                    textInput(
+                    TextInputLogin(
                       controller: _passwordController,
                       hint: 'Password',
                       isPassword: true,
@@ -197,7 +198,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                       ),
                     ),
-                    textInput(
+                    TextInputLogin(
                       controller: _confirmPasswordController,
                       hint: 'Konfirmasi Password',
                       isPassword: true,
@@ -217,6 +218,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     MoonDropdown(
                       show: _showDdPilihRumah,
                       constrainWidthToChild: true,
+                      onTapOutside: () =>
+                          setState(() => _showDdPilihRumah = false),
                       content: Column(
                         children: [
                           MoonMenuItem(
@@ -235,7 +238,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                       ),
                     ),
-                    textInput(
+                    TextInputLogin(
                       controller: _alamatController,
                       hint: 'Alamat (Jika tidak ada di list)',
                       keyboardType: TextInputType.streetAddress,
@@ -243,6 +246,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     MoonDropdown(
                       show: _showDdPilihKelurahan,
                       constrainWidthToChild: true,
+                      onTapOutside: () =>
+                          setState(() => _showDdPilihKelurahan = false),
                       content: Column(
                         children: [
                           MoonMenuItem(
@@ -321,28 +326,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
           child: const Icon(MoonIcons.controls_chevron_down_small_16_light),
         ),
       ),
-    );
-  }
-
-  MoonFormTextInput textInput({
-    required TextEditingController controller,
-    required String hint,
-    String Function(String?)? validator,
-    VoidCallback? onTap,
-    bool isPassword = false,
-    TextInputType? keyboardType,
-    Widget? trailing,
-  }) {
-    return MoonFormTextInput(
-      textInputSize: MoonTextInputSize.xl,
-      hasFloatingLabel: true,
-      controller: controller,
-      hintText: hint,
-      validator: validator,
-      onTap: onTap,
-      keyboardType: keyboardType,
-      obscureText: isPassword,
-      trailing: trailing,
     );
   }
 
