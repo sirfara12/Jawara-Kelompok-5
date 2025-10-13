@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jawara_pintar_kel_5/constants/constant_colors.dart';
+import 'package:jawara_pintar_kel_5/widget/drop_down_trailing_arrow.dart';
 import 'package:jawara_pintar_kel_5/widget/login_button.dart';
 import 'package:jawara_pintar_kel_5/widget/text_input_login.dart';
 import 'package:moon_design/moon_design.dart';
@@ -319,13 +320,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       readOnly: true,
       hintText: hintText,
       onTap: setState,
-      trailing: Center(
-        child: AnimatedRotation(
-          duration: const Duration(milliseconds: 150),
-          turns: isShow ? -0.5 : 0,
-          child: const Icon(MoonIcons.controls_chevron_down_small_16_light),
-        ),
-      ),
+      trailing: DropDownTrailingArrow(isShow: isShow),
     );
   }
 
