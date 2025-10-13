@@ -1,16 +1,15 @@
-# jawara_pintar_kel_5
+# Jawara Pintar Kel 5
 
-A new Flutter project.
+Versi mobile dari web [Jawara Pintar](http://jawara.sytes.net/), oleh kelompok 5
 
-## Getting Started
+# Pembagian Kelompok 5
 
-This project is a starting point for a Flutter application.
+Pembagian saat ini 
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+| **Nama**                          | Bagian (Menu)                    |
+| :-------------------------------- | :------------------------------- |
+| **Cakra Wangsa May Ahmad Widodo** | Keuangan                         |
+| **Hidayat Widi Saputra**          | Auth(Login, Register), Dashboard |
+| **Muhammad Rifda Musyaffa'**      | Kependudukan                     |
+| **Rafa Fadil Aras**               | Lainnya                          |
+| **Sirfaratih**                    | Kegiatan                         |
