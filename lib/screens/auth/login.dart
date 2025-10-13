@@ -1,3 +1,5 @@
+import 'dart:math' show max;
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jawara_pintar_kel_5/constants/constant_colors.dart';
@@ -34,12 +36,12 @@ class _LoginScreenState extends State<LoginScreen> {
             GestureDetector(
               onTap: () => setState(() => _showLoginForm = false),
               child: AnimatedContainer(
-                duration: const Duration(milliseconds: 300),
+                duration: Duration(milliseconds: 700),
                 curve: Curves.fastOutSlowIn,
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 alignment: Alignment.center,
                 height: _showLoginForm
-                    ? mascoutHeight - _loginFormHeight / 2
+                    ? max(mascoutHeight - _loginFormHeight / 2, 50)
                     : mascoutHeight,
                 child: Image.asset("assets/bilibili_jawara.webp"),
               ),
@@ -58,18 +60,18 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       LayoutBuilder(
                         builder: (context, constraints) {
+                          final textStyle =
+                              MediaQuery.of(context).size.height > 600
+                              ? MoonTokens.light.typography.heading.text48
+                              : MoonTokens.light.typography.heading.text24;
                           final children = [
                             Text(
                               "Jawara ",
-                              style: MoonTokens.light.typography.heading.text48
-                                  .copyWith(
-                                    color: MoonTokens.light.colors.piccolo,
-                                  ),
+                              style: textStyle.copyWith(
+                                color: MoonTokens.light.colors.piccolo,
+                              ),
                             ),
-                            Text(
-                              "Pintar",
-                              style: MoonTokens.light.typography.heading.text48,
-                            ),
+                            Text("Pintar", style: textStyle),
                           ];
                           if (constraints.maxWidth < 300) {
                             return Column(
