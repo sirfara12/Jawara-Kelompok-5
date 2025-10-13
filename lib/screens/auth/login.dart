@@ -164,7 +164,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           LoginButton(
                             text: "Login",
                             onTap: () => setState(() {
-                              _showLoginForm = !_showLoginForm;
+                              context.go('/admin/dashboard');
                             }),
                           ),
                           Row(

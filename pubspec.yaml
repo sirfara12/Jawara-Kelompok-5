@@ -35,6 +35,8 @@ dependencies:
   go_router: ^16.2.4
   moon_design: ^1.1.0
   provider: ^6.1.5+1
+  iconify_flutter: ^0.0.7
+  auto_size_text: ^3.0.0
 
 dev_dependencies:
   flutter_test:
