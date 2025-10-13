@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
         extensions: <ThemeExtension<dynamic>>[
           MoonTheme(tokens: MoonTokens.light),
         ],
+        scaffoldBackgroundColor: MoonTokens.light.colors.gohan,
       ),
       // darkTheme: ThemeData.dark().copyWith(
       //   extensions: <ThemeExtension<dynamic>>[
