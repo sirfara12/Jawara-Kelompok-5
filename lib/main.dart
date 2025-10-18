@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       title: 'Jawara Pintar',
       theme: ThemeData.light().copyWith(
         extensions: <ThemeExtension<dynamic>>[
