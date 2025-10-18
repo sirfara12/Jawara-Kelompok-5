@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 ///
 /// Usage:
 ///   playStoreTransitionPage(key: state.pageKey, child: MyPage());
-CustomTransitionPage<T> playStoreTransitionPage<T>({
+CustomTransitionPage<T> customTransitionPage<T>({
   required LocalKey key,
   required Widget child,
   Duration? transitionDuration,

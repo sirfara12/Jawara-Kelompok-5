@@ -35,10 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                    child: Text("Art from Bilibili"),
-                  ),
+                  const SizedBox.shrink(),
                   AnimatedContainer(
                     duration: heightPercentage != 1.0
                         ? Duration.zero
@@ -51,7 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         : mascoutHeight,
                     child: GestureDetector(
                       onTap: () => setState(() => _showLoginForm = false),
-                      child: Image.asset("assets/bilibili_jawara.webp"),
+                      child: Image.asset("assets/login_banner.webp"),
                     ),
                   ),
                   Column(

@@ -8,7 +8,7 @@ import 'package:jawara_pintar_kel_5/screens/penduduk/tambah_warga.dart';
 import 'package:jawara_pintar_kel_5/screens/penduduk/edit_warga.dart';
 import 'package:jawara_pintar_kel_5/screens/auth/login.dart';
 import 'package:jawara_pintar_kel_5/screens/auth/register.dart';
-import 'package:jawara_pintar_kel_5/widget/playstore_transition_page.dart';
+import 'package:jawara_pintar_kel_5/widget/custom_transition_page.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -28,7 +28,7 @@ final router = GoRouter(
           routes: [
             GoRoute(
               path: '/admin/dashboard',
-              pageBuilder: (context, state) => playStoreTransitionPage(
+              pageBuilder: (context, state) => customTransitionPage(
                 key: state.pageKey,
                 child: AdminDashboard(),
               ),
@@ -41,7 +41,7 @@ final router = GoRouter(
             GoRoute(
               path: '/penduduk/daftar',
               name: 'wargaList',
-              pageBuilder: (context, state) => playStoreTransitionPage(
+              pageBuilder: (context, state) => customTransitionPage(
                 key: state.pageKey,
                 child: const DaftarWargaPage(),
               ),
@@ -51,7 +51,7 @@ final router = GoRouter(
               name: 'wargaDetail',
               pageBuilder: (context, state) {
                 final data = state.extra as Map<String, String>? ?? {};
-                return playStoreTransitionPage(
+                return customTransitionPage(
                   key: state.pageKey,
                   child: DetailWargaPage(warga: data),
                 );
@@ -60,7 +60,7 @@ final router = GoRouter(
             GoRoute(
               path: '/penduduk/tambah',
               name: 'wargaAdd',
-              pageBuilder: (context, state) => playStoreTransitionPage(
+              pageBuilder: (context, state) => customTransitionPage(
                 key: state.pageKey,
                 child: const TambahWargaPage(),
               ),
@@ -70,7 +70,7 @@ final router = GoRouter(
               name: 'wargaEdit',
               pageBuilder: (context, state) {
                 final data = state.extra as Map<String, String>? ?? {};
-                return playStoreTransitionPage(
+                return customTransitionPage(
                   key: state.pageKey,
                   child: EditWargaPage(warga: data),
                 );

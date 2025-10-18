@@ -21,7 +21,26 @@ class AdminLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(child: navigationShell),
+      body: SafeArea(
+        child: AnimatedSwitcher(
+          duration: const Duration(milliseconds: 250),
+          switchInCurve: Curves.easeOut,
+          switchOutCurve: Curves.easeIn,
+          layoutBuilder: (currentChild, previousChildren) {
+            return Stack(
+              alignment: Alignment.center,
+              children: <Widget>[
+                ...previousChildren,
+                if (currentChild != null) currentChild,
+              ],
+            );
+          },
+          child: KeyedSubtree(
+            key: ValueKey<int>(navigationShell.currentIndex),
+            child: navigationShell,
+          ),
+        ),
+      ),
       bottomNavigationBar: BottomAppBar(
         color: Colors.white,
         height: 72,
