@@ -6,6 +6,8 @@ import 'package:jawara_pintar_kel_5/screens/penduduk/daftar_warga.dart';
 import 'package:jawara_pintar_kel_5/screens/penduduk/detail_warga.dart';
 import 'package:jawara_pintar_kel_5/screens/penduduk/tambah_warga.dart';
 import 'package:jawara_pintar_kel_5/screens/penduduk/edit_warga.dart';
+import 'package:jawara_pintar_kel_5/screens/admin/keuangan/keuangan_menu_screen.dart';
+import 'package:jawara_pintar_kel_5/screens/admin/pemasukan/pemasukan_screen.dart';
 import 'package:jawara_pintar_kel_5/screens/auth/login.dart';
 import 'package:jawara_pintar_kel_5/screens/auth/register.dart';
 import 'package:jawara_pintar_kel_5/widget/custom_transition_page.dart';
@@ -75,6 +77,19 @@ final router = GoRouter(
                   child: EditWargaPage(warga: data),
                 );
               },
+            ),
+          ],
+        ),
+
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: '/admin/keuangan',
+              builder: (context, state) => const KeuanganMenuScreen(),
+            ),
+            GoRoute(
+              path: '/admin/pemasukan',
+              builder: (context, state) => const PemasukanScreen(),
             ),
           ],
         ),
