@@ -160,10 +160,9 @@ class _KeuanganState extends State<Keuangan> {
                 );
               },
             ),
-
             chartKategori(),
-
             chartPerBulan(context),
+            const SizedBox(height: 16),
           ],
         ),
       ),
@@ -178,7 +177,7 @@ class _KeuanganState extends State<Keuangan> {
         Text('Per Bulan', style: MoonTokens.light.typography.heading.text16),
 
         PlotBarChart(
-          title: 'Pemasukan',
+          title: '📈 Pemasukan',
           titleTrailing: Text(
             '${_provider.year}',
             style: MoonTokens.light.typography.body.text14,
@@ -237,7 +236,7 @@ class _KeuanganState extends State<Keuangan> {
         ),
 
         PlotBarChart(
-          title: 'Pengeluaran',
+          title: '📉 Pengeluaran',
           titleTrailing: Text(
             '${_provider.year}',
             style: MoonTokens.light.typography.body.text14,
@@ -305,7 +304,7 @@ class _KeuanganState extends State<Keuangan> {
       children: [
         Text('Kategori', style: MoonTokens.light.typography.heading.text16),
         PlotPieCard(
-          title: 'Pemasukan',
+          title: '📈 Pemasukan',
           titleTrailing: Text(
             '${_provider.year}',
             style: MoonTokens.light.typography.body.text14,
@@ -326,7 +325,7 @@ class _KeuanganState extends State<Keuangan> {
               data: PieChartSectionData(
                 value: 30,
                 color: MoonTokens.light.colors.dodoria,
-                radius: 45,
+                radius: 40,
                 title: '30%',
                 titleStyle: const TextStyle(fontSize: 12, color: Colors.white),
               ),
@@ -336,7 +335,7 @@ class _KeuanganState extends State<Keuangan> {
               data: PieChartSectionData(
                 value: 55,
                 color: MoonTokens.light.colors.chichi,
-                radius: 50,
+                radius: 40,
                 title: '55%',
                 titleStyle: const TextStyle(fontSize: 12, color: Colors.white),
               ),
@@ -345,7 +344,7 @@ class _KeuanganState extends State<Keuangan> {
         ),
         const SizedBox(height: 4),
         PlotPieCard(
-          title: 'Pengeluaran',
+          title: '📉 Pengeluaran',
           titleTrailing: Text(
             '${_provider.year}',
             style: MoonTokens.light.typography.body.text14,
@@ -366,7 +365,7 @@ class _KeuanganState extends State<Keuangan> {
               data: PieChartSectionData(
                 value: 30,
                 color: MoonTokens.light.colors.dodoria,
-                radius: 45,
+                radius: 40,
                 title: '30%',
                 titleStyle: const TextStyle(fontSize: 12, color: Colors.white),
               ),
@@ -376,7 +375,7 @@ class _KeuanganState extends State<Keuangan> {
               data: PieChartSectionData(
                 value: 55,
                 color: MoonTokens.light.colors.chichi,
-                radius: 50,
+                radius: 40,
                 title: '55%',
                 titleStyle: const TextStyle(fontSize: 12, color: Colors.white),
               ),
