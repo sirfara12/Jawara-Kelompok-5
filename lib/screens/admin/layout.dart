@@ -80,7 +80,7 @@ class AdminLayout extends StatelessWidget {
               icon: Iconify(IconifyConstants.letsIconMoneyLight, size: 24),
               label: tabs[2],
               active: activeIndex == 2,
-              onTap: () {},
+              onTap: () => context.push('/admin/keuangan'),
             ),
             BottomAppBarItem(
               icon: Iconify(IconifyConstants.arcticonActiviyManager, size: 24),
