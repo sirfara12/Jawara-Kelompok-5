@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:jawara_pintar_kel_5/screens/dashboard/dashboard.dart';
+import 'package:jawara_pintar_kel_5/screens/admin/dashboard/dashboard.dart';
 import 'package:jawara_pintar_kel_5/screens/layout.dart';
-import 'package:jawara_pintar_kel_5/screens/penduduk/daftar_warga.dart';
-import 'package:jawara_pintar_kel_5/screens/penduduk/detail_warga.dart';
-import 'package:jawara_pintar_kel_5/screens/penduduk/tambah_warga.dart';
-import 'package:jawara_pintar_kel_5/screens/penduduk/edit_warga.dart';
+import 'package:jawara_pintar_kel_5/screens/admin/penduduk/warga/daftar_warga.dart';
+import 'package:jawara_pintar_kel_5/screens/admin/penduduk/warga/detail_warga.dart';
+import 'package:jawara_pintar_kel_5/screens/admin/penduduk/warga/tambah_warga.dart';
+import 'package:jawara_pintar_kel_5/screens/admin/penduduk/warga/edit_warga.dart';
 import 'package:jawara_pintar_kel_5/screens/admin/keuangan/keuangan_menu_screen.dart';
 import 'package:jawara_pintar_kel_5/screens/admin/pemasukan/pemasukan_screen.dart';
 import 'package:jawara_pintar_kel_5/screens/auth/login.dart';
@@ -41,7 +41,7 @@ final router = GoRouter(
         StatefulShellBranch(
           routes: [
             GoRoute(
-              path: '/penduduk/daftar',
+              path: '/admin/penduduk/daftar-warga',
               name: 'wargaList',
               pageBuilder: (context, state) => customTransitionPage(
                 key: state.pageKey,
@@ -49,7 +49,7 @@ final router = GoRouter(
               ),
             ),
             GoRoute(
-              path: '/penduduk/detail',
+              path: '/admin/penduduk/detail-warga',
               name: 'wargaDetail',
               pageBuilder: (context, state) {
                 final data = state.extra as Map<String, String>? ?? {};
@@ -60,7 +60,7 @@ final router = GoRouter(
               },
             ),
             GoRoute(
-              path: '/penduduk/tambah',
+              path: '/admin/penduduk/tambah-warga',
               name: 'wargaAdd',
               pageBuilder: (context, state) => customTransitionPage(
                 key: state.pageKey,
@@ -68,7 +68,7 @@ final router = GoRouter(
               ),
             ),
             GoRoute(
-              path: '/penduduk/edit',
+              path: '/admin/penduduk/edit-warga',
               name: 'wargaEdit',
               pageBuilder: (context, state) {
                 final data = state.extra as Map<String, String>? ?? {};
