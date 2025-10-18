@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:jawara_pintar_kel_5/screens/admin/layout.dart';
 import 'package:jawara_pintar_kel_5/widget/moon_result_modal.dart';
 import 'package:moon_design/moon_design.dart';
 
@@ -17,39 +16,52 @@ class DetailWargaPage extends StatelessWidget {
     final keluarga = warga['family'] ?? '-';
     final status = warga['status'] ?? 'Aktif';
 
-    return AdminLayout(
-      activeIndex: 1,
-      title: 'Detail Warga',
-      showBackButton: true,
-      appBarActions: [
-        _MoreMenu(
-          wargaName: name,
-          onEdit: () {
-            context.pushNamed('wargaEdit', extra: warga);
-          },
-          onDeleteConfirmed: () async {
-            final confirmed = await _showDeleteConfirmationDialog(
-              context: context,
-              title: 'Hapus Data Warga?',
-              message:
-                  'Apakah Anda yakin ingin menghapus data "$name"? Data yang sudah dihapus tidak dapat dikembalikan.',
-            );
-            if (confirmed == true) {
-              // TODO: Panggil service penghapusan data di sini
-              await showResultModal(
-                context,
-                type: ResultType.success,
-                title: 'Berhasil',
-                description: 'Data "$name" telah dihapus.',
-                actionLabel: 'Selesai',
-                autoProceed: true,
-              );
-              // Kembali ke halaman daftar warga
-              if (context.mounted) Navigator.of(context).pop();
-            }
-          },
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: false,
+        elevation: 0,
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          onPressed: () => context.pop(),
+          icon: const Icon(Icons.chevron_left, color: Colors.black),
         ),
-      ],
+        title: Text(
+          'Detail Warga',
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
+        actions: [
+          _MoreMenu(
+            wargaName: name,
+            onEdit: () {
+              context.pushNamed('wargaEdit', extra: warga);
+            },
+            onDeleteConfirmed: () async {
+              final confirmed = await _showDeleteConfirmationDialog(
+                context: context,
+                title: 'Hapus Data Warga?',
+                message:
+                    'Apakah Anda yakin ingin menghapus data "$name"? Data yang sudah dihapus tidak dapat dikembalikan.',
+              );
+              if (confirmed == true) {
+                // TODO: Panggil service penghapusan data di sini
+                await showResultModal(
+                  context,
+                  type: ResultType.success,
+                  title: 'Berhasil',
+                  description: 'Data "$name" telah dihapus.',
+                  actionLabel: 'Selesai',
+                  autoProceed: true,
+                );
+                // Kembali ke halaman daftar warga
+                if (context.mounted) Navigator.of(context).pop();
+              }
+            },
+          ),
+        ],
+      ),
+
       body: Container(
         color: const Color(0xFFF7F7FB),
         child: ListView(

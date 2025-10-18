@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:jawara_pintar_kel_5/screens/admin/layout.dart';
 import 'package:go_router/go_router.dart';
 
 class DaftarWargaPage extends StatefulWidget {
@@ -244,120 +243,114 @@ class _DaftarWargaPageState extends State<DaftarWargaPage> {
 
   @override
   Widget build(BuildContext context) {
-    return AdminLayout(
-      activeIndex: 1,
-      body: Scaffold(
-        backgroundColor: const Color(0xFFF7F7FB),
-        appBar: AppBar(
-          centerTitle: false,
-          elevation: 0,
-          backgroundColor: Colors.white,
-          foregroundColor: Colors.black,
-          title: Row(
-            children: [
-              IconButton(
-                onPressed: () => context.go('/admin/dashboard'),
-                icon: const Icon(Icons.chevron_left, color: Colors.black),
+    return Scaffold(
+      backgroundColor: const Color(0xFFF7F7FB),
+      appBar: AppBar(
+        centerTitle: false,
+        elevation: 0,
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+        title: Row(
+          children: [
+            // IconButton(
+            //   onPressed: () => context.go('/admin/dashboard'),
+            //   icon: const Icon(Icons.chevron_left, color: Colors.black),
+            // ),
+            const SizedBox(width: 8),
+            const Text(
+              'Daftar Warga',
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
               ),
-              const SizedBox(width: 8),
-              const Text(
-                'Daftar Warga',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
-        body: SafeArea(
-          child: Column(
-            children: [
-              // Top navigation pills
-              Container(
-                color: Colors.white,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 12,
-                ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          children: [
-                            _TopNavItem(
-                              label: 'Penduduk',
-                              active: true,
-                              primary: primary,
-                              onTap: () {},
-                            ),
-                            const SizedBox(width: 8),
-                            _TopNavItem(
-                              label: 'Rumah',
-                              active: false,
-                              primary: primary,
-                              onTap: () {},
-                            ),
-                            const SizedBox(width: 8),
-                            _TopNavItem(
-                              label: 'Keluarga',
-                              active: false,
-                              primary: primary,
-                              onTap: () {},
-                            ),
-                            const SizedBox(width: 8),
-                            _TopNavItem(
-                              label: 'Penerimaan',
-                              active: false,
-                              primary: primary,
-                              onTap: () {},
-                            ),
-                          ],
-                        ),
+      ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            // Top navigation pills
+            Container(
+              color: Colors.white,
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          _TopNavItem(
+                            label: 'Penduduk',
+                            active: true,
+                            primary: primary,
+                            onTap: () {},
+                          ),
+                          const SizedBox(width: 8),
+                          _TopNavItem(
+                            label: 'Rumah',
+                            active: false,
+                            primary: primary,
+                            onTap: () {},
+                          ),
+                          const SizedBox(width: 8),
+                          _TopNavItem(
+                            label: 'Keluarga',
+                            active: false,
+                            primary: primary,
+                            onTap: () {},
+                          ),
+                          const SizedBox(width: 8),
+                          _TopNavItem(
+                            label: 'Penerimaan',
+                            active: false,
+                            primary: primary,
+                            onTap: () {},
+                          ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
-              ),
-
-              // Search and filter
-              _SearchFilterBar(
-                controller: _searchController,
-                focusNode: _searchFocusNode,
-                onChanged: (v) => setState(() => _query = v),
-                onFilterTap: _openFilter,
-              ),
-
-              // list
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: ListView.separated(
-                    padding: const EdgeInsets.only(bottom: 80, top: 8),
-                    itemCount: _filtered.length,
-                    separatorBuilder: (_, __) => const SizedBox(height: 12),
-                    itemBuilder: (context, index) {
-                      final item = _filtered[index];
-                      return _WargaCard(
-                        item: item,
-                        primary: primary,
-                        onTap: () =>
-                            context.pushNamed('wargaDetail', extra: item),
-                      );
-                    },
                   ),
+                ],
+              ),
+            ),
+
+            // Search and filter
+            _SearchFilterBar(
+              controller: _searchController,
+              focusNode: _searchFocusNode,
+              onChanged: (v) => setState(() => _query = v),
+              onFilterTap: _openFilter,
+            ),
+
+            // list
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: ListView.separated(
+                  padding: const EdgeInsets.only(bottom: 80, top: 8),
+                  itemCount: _filtered.length,
+                  separatorBuilder: (_, __) => const SizedBox(height: 12),
+                  itemBuilder: (context, index) {
+                    final item = _filtered[index];
+                    return _WargaCard(
+                      item: item,
+                      primary: primary,
+                      onTap: () =>
+                          context.pushNamed('wargaDetail', extra: item),
+                    );
+                  },
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: primary,
-          onPressed: () => context.pushNamed('wargaAdd'),
-          child: const Icon(Icons.add, color: Colors.white),
-        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: primary,
+        onPressed: () => context.pushNamed('wargaAdd'),
+        child: const Icon(Icons.add, color: Colors.white),
       ),
     );
   }
