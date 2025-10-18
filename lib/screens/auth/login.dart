@@ -39,18 +39,18 @@ class _LoginScreenState extends State<LoginScreen> {
                     padding: const EdgeInsets.symmetric(horizontal: 24.0),
                     child: Text("Art from Bilibili"),
                   ),
-                  GestureDetector(
-                    onTap: () => setState(() => _showLoginForm = false),
-                    child: AnimatedContainer(
-                      duration: heightPercentage != 1.0
-                          ? Duration.zero
-                          : const Duration(milliseconds: 700),
-                      curve: Curves.fastOutSlowIn,
-                      padding: const EdgeInsets.symmetric(horizontal: 24),
-                      alignment: Alignment.center,
-                      height: _showLoginForm
-                          ? max(mascoutHeight - _loginFormHeight / 2, 50)
-                          : mascoutHeight,
+                  AnimatedContainer(
+                    duration: heightPercentage != 1.0
+                        ? Duration.zero
+                        : const Duration(milliseconds: 700),
+                    curve: Curves.fastOutSlowIn,
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    alignment: Alignment.center,
+                    height: _showLoginForm
+                        ? max(mascoutHeight - _loginFormHeight / 2, 50)
+                        : mascoutHeight,
+                    child: GestureDetector(
+                      onTap: () => setState(() => _showLoginForm = false),
                       child: Image.asset("assets/bilibili_jawara.webp"),
                     ),
                   ),
