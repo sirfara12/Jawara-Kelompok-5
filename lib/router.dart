@@ -1,5 +1,5 @@
 import 'package:go_router/go_router.dart';
-import 'package:jawara_pintar_kel_5/screens/admin/dashboard.dart';
+import 'package:jawara_pintar_kel_5/screens/admin/dashboard/dashboard.dart';
 import 'package:jawara_pintar_kel_5/screens/auth/login.dart';
 import 'package:jawara_pintar_kel_5/screens/auth/register.dart';
 

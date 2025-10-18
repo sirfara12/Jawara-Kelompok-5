@@ -21,7 +21,7 @@ class AdminLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: body,
+      body: SafeArea(child: body),
       bottomNavigationBar: BottomAppBar(
         color: Colors.white,
         height: 72,
