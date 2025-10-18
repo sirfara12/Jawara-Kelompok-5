@@ -1,18 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jawara_pintar_kel_5/screens/admin/dashboard/dashboard.dart';
+
 import 'package:jawara_pintar_kel_5/screens/layout.dart';
 import 'package:jawara_pintar_kel_5/screens/admin/penduduk/warga/daftar_warga.dart';
 import 'package:jawara_pintar_kel_5/screens/admin/penduduk/warga/detail_warga.dart';
 import 'package:jawara_pintar_kel_5/screens/admin/penduduk/warga/tambah_warga.dart';
 import 'package:jawara_pintar_kel_5/screens/admin/penduduk/warga/edit_warga.dart';
+
 import 'package:jawara_pintar_kel_5/screens/admin/keuangan/keuangan_menu_screen.dart';
+import 'package:jawara_pintar_kel_5/screens/admin/keuangan/laporan_keuangan_screen.dart';
+import 'package:jawara_pintar_kel_5/screens/admin/keuangan/pengeluaran_screen.dart';
 import 'package:jawara_pintar_kel_5/screens/admin/pemasukan/pemasukan_screen.dart';
 import 'package:jawara_pintar_kel_5/screens/auth/login.dart';
 import 'package:jawara_pintar_kel_5/screens/auth/register.dart';
 import 'package:jawara_pintar_kel_5/widget/custom_transition_page.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
+
+
 
 final router = GoRouter(
   initialLocation: "/login",
@@ -94,6 +100,14 @@ final router = GoRouter(
           ],
         ),
       ],
+    ),
+    GoRoute(
+      path: '/admin/pengeluaran',
+      builder: (context, state) => const PengeluaranScreen(),
+    ),
+    GoRoute(
+      path: '/admin/laporan-keuangan',
+      builder: (context, state) => const LaporanKeuanganScreen(),
     ),
   ],
 );
