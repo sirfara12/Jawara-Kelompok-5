@@ -9,6 +9,7 @@ class PengeluaranScreen extends StatelessWidget {
     return AdminLayout(
       activeIndex: 2, // Keuangan tab
       title: 'Pengeluaran',
+      showBottomNav: true, // Show bottom nav as requested
       body: Container(
         color: const Color(0xFFF8F9FA),
         child: SingleChildScrollView(

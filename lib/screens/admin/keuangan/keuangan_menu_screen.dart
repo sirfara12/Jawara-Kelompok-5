@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:jawara_pintar_kel_5/screens/admin/layout.dart';
 
 class KeuanganMenuScreen extends StatelessWidget {
   const KeuanganMenuScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return AdminLayout(
-      activeIndex: 2, // Keuangan tab
-      title: 'Keuangan',
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: false,
+        elevation: 0,
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+        automaticallyImplyLeading: false,
+        title: const Text(
+          'Keuangan',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+      ),
       body: Container(
         color: const Color(0xFFF8F9FA),
         child: SingleChildScrollView(

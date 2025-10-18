@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:jawara_pintar_kel_5/models/iuran_model.dart';
-import 'package:jawara_pintar_kel_5/screens/admin/layout.dart';
 import 'package:jawara_pintar_kel_5/screens/admin/pemasukan/detail_iuran_screen.dart';
 import 'package:jawara_pintar_kel_5/screens/admin/pemasukan/edit_iuran_screen.dart';
 
@@ -55,17 +54,26 @@ class _PemasukanScreenState extends State<PemasukanScreen>
 
   @override
   Widget build(BuildContext context) {
-    return AdminLayout(
-      activeIndex: 2, // Keuangan tab
-      title: 'Pemasukan',
-      appBarActions: [
-        IconButton(
-          icon: const Icon(Icons.info_outline, color: Colors.black),
-          onPressed: () {
-            _showInfoDialog();
-          },
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: false,
+        elevation: 0,
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+        automaticallyImplyLeading: false,
+        title: const Text(
+          'Pemasukan',
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
-      ],
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.info_outline, color: Colors.black),
+            onPressed: () {
+              _showInfoDialog();
+            },
+          ),
+        ],
+      ),
       body: Stack(
         children: [
           Column(
