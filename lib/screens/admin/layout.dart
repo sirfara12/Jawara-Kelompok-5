@@ -8,7 +8,20 @@ import 'package:moon_design/moon_design.dart';
 class AdminLayout extends StatelessWidget {
   final Widget body;
   final int activeIndex;
-  AdminLayout({super.key, required this.body, required this.activeIndex});
+  final String? title;
+  final bool showBackButton;
+  final VoidCallback? onBackPressed;
+  final List<Widget>? appBarActions;
+
+  AdminLayout({
+    super.key,
+    required this.body,
+    required this.activeIndex,
+    this.title,
+    this.showBackButton = false,
+    this.onBackPressed,
+    this.appBarActions,
+  });
 
   final List<String> tabs = [
     'Rumah',
@@ -21,6 +34,26 @@ class AdminLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: title != null
+          ? AppBar(
+              centerTitle: false,
+              elevation: 0,
+              backgroundColor: Colors.white,
+              foregroundColor: Colors.black,
+              automaticallyImplyLeading: false,
+              leading: showBackButton
+                  ? IconButton(
+                      onPressed: onBackPressed ?? () => context.pop(),
+                      icon: const Icon(Icons.chevron_left, color: Colors.black),
+                    )
+                  : null,
+              title: Text(
+                title!,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+              actions: appBarActions,
+            )
+          : null,
       body: SafeArea(child: body),
       bottomNavigationBar: BottomAppBar(
         color: Colors.white,
@@ -41,7 +74,7 @@ class AdminLayout extends StatelessWidget {
               icon: Iconify(IconifyConstants.fluentPeopleLight, size: 24),
               label: tabs[1],
               active: activeIndex == 1,
-              onTap: () {},
+              onTap: () => context.go('/penduduk/daftar'),
             ),
             BottomAppBarItem(
               icon: Iconify(IconifyConstants.letsIconMoneyLight, size: 24),
