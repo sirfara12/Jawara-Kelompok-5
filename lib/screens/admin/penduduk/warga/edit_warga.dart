@@ -49,9 +49,23 @@ class _EditWargaPageState extends State<EditWargaPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: const Color(0xFFF7F7FB),
-      child: ListView(
+    return Scaffold(
+      backgroundColor: const Color(0xFFF7F7FB),
+      appBar: AppBar(
+        centerTitle: false,
+        elevation: 0,
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+        leading: IconButton(
+          onPressed: () => context.pop(),
+          icon: const Icon(Icons.chevron_left, color: Colors.black),
+        ),
+        title: const Text(
+          'Edit Warga',
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+        ),
+      ),
+      body: ListView(
         padding: const EdgeInsets.only(bottom: 24),
         children: [
           SectionCard(

@@ -1,33 +1,53 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:jawara_pintar_kel_5/utils.dart' show getPrimaryColor;
 
-class DaftarWargaPage extends StatefulWidget {
-  const DaftarWargaPage({super.key});
+class ManajemenPenggunaScreen extends StatefulWidget {
+  const ManajemenPenggunaScreen({super.key});
 
   @override
-  State<DaftarWargaPage> createState() => _DaftarWargaPageState();
+  State<ManajemenPenggunaScreen> createState() =>
+      _ManajemenPenggunaScreenState();
 }
 
-class _DaftarWargaPageState extends State<DaftarWargaPage> {
+class _ManajemenPenggunaScreenState extends State<ManajemenPenggunaScreen> {
+  final Color primary = const Color(0xFF4E46B4);
   final TextEditingController _searchController = TextEditingController();
   final FocusNode _searchFocusNode = FocusNode();
   String _query = '';
 
-  final List<Map<String, String>> _items = List.generate(8, (i) {
-    return {
-      'name': i % 2 == 0 ? 'Muhamad Rifda Musyaffa\'' : 'Gamers Sejati 18xX',
-      'nik': (2300000000 + i).toString(),
-      'family': ['Keluarga Besar Mojokerto', 'Keluarga Besar Blitar'][i % 2],
-      'status': i % 3 == 0 ? 'Aktif' : 'Nonaktif',
-      'life': i % 2 == 0 ? 'Hidup' : 'Wafat',
-    };
-  });
+  final List<Map<String, String>> _users = [
+    {
+      'name': 'Rafa Fadil Aras',
+      'role': 'Warga',
+      'status': 'Diterima',
+      'nik': '3573034501050004',
+      'email': 'rafadilaras@gmail.com',
+      'phone': '085850889729',
+      'gender': 'Perempuan',
+    },
+    {
+      'name': 'Ini siapa',
+      'role': 'Admin',
+      'status': 'Diterima',
+      'nik': '3573034501050005',
+      'email': 'admin@gmail.com',
+      'phone': '081234567890',
+      'gender': 'Laki-laki',
+    },
+    {
+      'name': 'Ayu',
+      'role': 'Bendahara',
+      'status': 'Diterima',
+      'nik': '3573034501050006',
+      'email': 'ayu@gmail.com',
+      'phone': '082345678901',
+      'gender': 'Perempuan',
+    },
+  ];
 
   void _openFilter() {
-    String? gender;
+    String? role;
     String? status;
-    String? family;
 
     showModalBottomSheet(
       context: context,
@@ -62,7 +82,7 @@ class _DaftarWargaPageState extends State<DaftarWargaPage> {
                       ),
                       const SizedBox(height: 12),
                       const Text(
-                        'Filter Penerimaan Warga',
+                        'Filter Pengguna',
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w700,
@@ -70,25 +90,29 @@ class _DaftarWargaPageState extends State<DaftarWargaPage> {
                       ),
                       const SizedBox(height: 16),
                       const Text(
-                        'Jenis Kelamin',
+                        'Role',
                         style: TextStyle(fontWeight: FontWeight.w600),
                       ),
                       const SizedBox(height: 8),
                       DropdownButtonFormField<String>(
-                        initialValue: gender,
+                        value: role,
                         isExpanded: true,
                         decoration: _dropdownDecoration(),
                         items: const [
                           DropdownMenuItem(
-                            value: 'Laki-laki',
-                            child: Text('Laki-laki'),
+                            value: 'Warga',
+                            child: Text('Warga'),
                           ),
                           DropdownMenuItem(
-                            value: 'Perempuan',
-                            child: Text('Perempuan'),
+                            value: 'Admin',
+                            child: Text('Admin'),
+                          ),
+                          DropdownMenuItem(
+                            value: 'Bendahara',
+                            child: Text('Bendahara'),
                           ),
                         ],
-                        onChanged: (v) => setModalState(() => gender = v),
+                        onChanged: (v) => setModalState(() => role = v),
                       ),
                       const SizedBox(height: 16),
                       const Text(
@@ -97,46 +121,24 @@ class _DaftarWargaPageState extends State<DaftarWargaPage> {
                       ),
                       const SizedBox(height: 8),
                       DropdownButtonFormField<String>(
-                        initialValue: status,
+                        value: status,
                         isExpanded: true,
                         decoration: _dropdownDecoration(),
                         items: const [
                           DropdownMenuItem(
-                            value: 'Aktif',
-                            child: Text('Aktif'),
+                            value: 'Diterima',
+                            child: Text('Diterima'),
                           ),
                           DropdownMenuItem(
-                            value: 'Nonaktif',
-                            child: Text('Nonaktif'),
+                            value: 'Menunggu',
+                            child: Text('Menunggu'),
                           ),
                           DropdownMenuItem(
-                            value: 'Wafat',
-                            child: Text('Wafat'),
+                            value: 'Ditolak',
+                            child: Text('Ditolak'),
                           ),
                         ],
                         onChanged: (v) => setModalState(() => status = v),
-                      ),
-                      const SizedBox(height: 16),
-                      const Text(
-                        'Keluarga',
-                        style: TextStyle(fontWeight: FontWeight.w600),
-                      ),
-                      const SizedBox(height: 8),
-                      DropdownButtonFormField<String>(
-                        initialValue: family,
-                        isExpanded: true,
-                        decoration: _dropdownDecoration(),
-                        items: const [
-                          DropdownMenuItem(
-                            value: 'Keluarga Besar Mojokerto',
-                            child: Text('Keluarga Besar Mojokerto'),
-                          ),
-                          DropdownMenuItem(
-                            value: 'Keluarga Besar Blitar',
-                            child: Text('Keluarga Besar Blitar'),
-                          ),
-                        ],
-                        onChanged: (v) => setModalState(() => family = v),
                       ),
                       const SizedBox(height: 20),
                       Row(
@@ -157,9 +159,8 @@ class _DaftarWargaPageState extends State<DaftarWargaPage> {
                               ),
                               onPressed: () {
                                 setModalState(() {
-                                  gender = null;
+                                  role = null;
                                   status = null;
-                                  family = null;
                                 });
                               },
                               child: const Text(
@@ -224,13 +225,9 @@ class _DaftarWargaPageState extends State<DaftarWargaPage> {
   }
 
   List<Map<String, String>> get _filtered {
-    if (_query.isEmpty) return _items;
-    return _items
-        .where(
-          (e) =>
-              e['name']!.toLowerCase().contains(_query.toLowerCase()) ||
-              e['nik']!.contains(_query),
-        )
+    if (_query.isEmpty) return _users;
+    return _users
+        .where((e) => e['name']!.toLowerCase().contains(_query.toLowerCase()))
         .toList();
   }
 
@@ -251,17 +248,73 @@ class _DaftarWargaPageState extends State<DaftarWargaPage> {
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         leading: IconButton(
-          onPressed: () => context.pop(),
+          onPressed: () => Navigator.pop(context),
           icon: const Icon(Icons.chevron_left, color: Colors.black),
         ),
         title: const Text(
-          'Daftar Warga',
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          'Manajemen Pengguna',
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ),
       body: SafeArea(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Header section
+            Container(
+              color: Colors.white,
+              width: double.infinity,
+              padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Daftar Pengguna',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black87,
+                        ),
+                      ),
+                      ElevatedButton.icon(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: primary,
+                          foregroundColor: Colors.white,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 10,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        onPressed: () {
+                          context.push(
+                            '/admin/lainnya/manajemen-pengguna/tambah',
+                          );
+                        },
+                        icon: const Icon(Icons.add, size: 18),
+                        label: const Text(
+                          'Tambah Pengguna',
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+
             // Search and filter
             _SearchFilterBar(
               controller: _searchController,
@@ -270,21 +323,51 @@ class _DaftarWargaPageState extends State<DaftarWargaPage> {
               onFilterTap: _openFilter,
             ),
 
-            // list
+            // User list
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: ListView.separated(
-                  padding: const EdgeInsets.only(bottom: 80, top: 8),
+                  padding: const EdgeInsets.only(bottom: 16, top: 8),
                   itemCount: _filtered.length,
                   separatorBuilder: (_, __) => const SizedBox(height: 12),
                   itemBuilder: (context, index) {
-                    final item = _filtered[index];
-                    return _WargaCard(
-                      item: item,
-                      primary: getPrimaryColor(context),
-                      onTap: () =>
-                          context.pushNamed('wargaDetail', extra: item),
+                    final user = _filtered[index];
+                    return _UserCard(
+                      user: user,
+                      primary: primary,
+                      onDetailTap: () {
+                        // Kirim data dengan Map<String, String>
+                        context.push(
+                          '/admin/lainnya/manajemen-pengguna/detail',
+                          extra: {
+                            'name': user['name'] ?? '',
+                            'role': user['role'] ?? '',
+                            'status': user['status'] ?? '',
+                            'nik': user['nik'] ?? '',
+                            'email': user['email'] ?? '',
+                            'phone': user['phone'] ?? '',
+                            'gender': user['gender'] ?? '',
+                          },
+                        );
+                      },
+                      onEditTap: () {
+                        context.push(
+                          '/admin/lainnya/manajemen-pengguna/edit',
+                          extra: {
+                            'name': user['name'] ?? '',
+                            'role': user['role'] ?? '',
+                            'status': user['status'] ?? '',
+                            'nik': user['nik'] ?? '',
+                            'email': user['email'] ?? '',
+                            'phone': user['phone'] ?? '',
+                            'gender': user['gender'] ?? '',
+                          },
+                        );
+                      },
+                      onDeleteTap: () {
+                        // Show delete confirmation
+                      },
                     );
                   },
                 ),
@@ -292,11 +375,6 @@ class _DaftarWargaPageState extends State<DaftarWargaPage> {
             ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: getPrimaryColor(context),
-        onPressed: () => context.pushNamed('wargaAdd'),
-        child: const Icon(Icons.add, color: Colors.white),
       ),
     );
   }
@@ -344,7 +422,8 @@ class _SearchFilterBar extends StatelessWidget {
                     size: 20,
                     color: Colors.grey[600],
                   ),
-                  hintText: 'Search Name or NIK',
+                  hintText: 'Search',
+                  hintStyle: TextStyle(color: Colors.grey[500]),
                   border: InputBorder.none,
                   contentPadding: const EdgeInsets.symmetric(
                     vertical: 12,
@@ -361,9 +440,17 @@ class _SearchFilterBar extends StatelessWidget {
             child: InkWell(
               borderRadius: BorderRadius.circular(12),
               onTap: onFilterTap,
-              child: const Padding(
-                padding: EdgeInsets.all(10.0),
-                child: Icon(Icons.tune, color: Colors.black),
+              child: Container(
+                padding: const EdgeInsets.all(10.0),
+                decoration: BoxDecoration(
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Color.fromRGBO(0, 0, 0, 0.03),
+                      blurRadius: 8,
+                    ),
+                  ],
+                ),
+                child: const Icon(Icons.tune, color: Colors.black, size: 22),
               ),
             ),
           ),
@@ -373,31 +460,42 @@ class _SearchFilterBar extends StatelessWidget {
   }
 }
 
-class _WargaCard extends StatelessWidget {
-  final Map<String, String> item;
+class _UserCard extends StatelessWidget {
+  final Map<String, String> user;
   final Color primary;
-  final VoidCallback? onTap;
+  final VoidCallback? onDetailTap;
+  final VoidCallback? onEditTap;
+  final VoidCallback? onDeleteTap;
 
-  const _WargaCard({required this.item, required this.primary, this.onTap});
+  const _UserCard({
+    required this.user,
+    required this.primary,
+    this.onDetailTap,
+    this.onEditTap,
+    this.onDeleteTap,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
         borderRadius: BorderRadius.circular(12),
-        onTap: onTap,
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(12),
-            boxShadow: const [
-              BoxShadow(color: Color.fromRGBO(0, 0, 0, 0.03), blurRadius: 8),
-            ],
+        boxShadow: const [
+          BoxShadow(
+            color: Color.fromRGBO(0, 0, 0, 0.04),
+            blurRadius: 8,
+            offset: Offset(0, 2),
           ),
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Row(
+        ],
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
@@ -405,141 +503,120 @@ class _WargaCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        item['name'] ?? '-',
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
+                        user['name'] ?? '-',
                         style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black,
                         ),
                       ),
-                      const SizedBox(height: 6),
-                      Text(
-                        'NIK : ${item['nik']}',
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(color: Colors.black87),
-                      ),
                       const SizedBox(height: 4),
-                      Builder(
-                        builder: (context) {
-                          final c = Colors.black;
-                          return Text(
-                            'Keluarga : ${item['family']}',
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(color: c.withValues(alpha: 0.8)),
-                          );
-                        },
-                      ),
-                      const SizedBox(height: 10),
-                      Wrap(
-                        spacing: 8,
-                        runSpacing: 8,
-                        children: [
-                          _StatusChip(status: item['status'] ?? 'Nonaktif'),
-                          _LifeChip(life: item['life'] ?? 'Hidup'),
-                        ],
+                      Text(
+                        user['role'] ?? '-',
+                        style: TextStyle(fontSize: 14, color: Colors.grey[700]),
                       ),
                     ],
                   ),
                 ),
-                const SizedBox(width: 12),
                 Container(
-                  width: 36,
-                  height: 36,
-                  decoration: BoxDecoration(
-                    color: const Color.fromRGBO(78, 70, 180, 0.08),
-                    shape: BoxShape.circle,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 6,
                   ),
-                  child: Icon(Icons.chevron_right, color: primary),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF34C759),
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  child: Text(
+                    user['status'] ?? 'Diterima',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                 ),
               ],
             ),
-          ),
+            const SizedBox(height: 16),
+            Row(
+              children: [
+                Expanded(
+                  child: _ActionButton(
+                    icon: Icons.remove_red_eye_outlined,
+                    label: 'Detail',
+                    onTap: onDetailTap,
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: _ActionButton(
+                    icon: Icons.edit_outlined,
+                    label: 'Edit',
+                    onTap: onEditTap,
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: _ActionButton(
+                    icon: Icons.delete_outline,
+                    label: 'Hapus',
+                    color: Colors.red,
+                    onTap: onDeleteTap,
+                  ),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );
   }
 }
 
-class _StatusChip extends StatelessWidget {
-  final String status;
-  const _StatusChip({required this.status});
+class _ActionButton extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final Color? color;
+  final VoidCallback? onTap;
+
+  const _ActionButton({
+    required this.icon,
+    required this.label,
+    this.color,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
-    Color bg;
-    Color text = Colors.white;
-    switch (status.toLowerCase()) {
-      case 'aktif':
-        bg = const Color(0xFF4E46B4); // Primary color
-        break;
-      default:
-        bg = Colors.grey.shade300;
-        text = Colors.black87;
-    }
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-      decoration: BoxDecoration(
-        color: bg,
+    final buttonColor = color ?? Colors.grey[800];
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onTap,
         borderRadius: BorderRadius.circular(8),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(Icons.map, size: 14, color: text),
-          const SizedBox(width: 6),
-          Text(
-            status,
-            style: TextStyle(
-              color: text,
-              fontSize: 12,
-              fontWeight: FontWeight.w600,
-            ),
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey[300]!),
+            borderRadius: BorderRadius.circular(8),
           ),
-        ],
-      ),
-    );
-  }
-}
-
-class _LifeChip extends StatelessWidget {
-  final String life;
-  const _LifeChip({required this.life});
-
-  @override
-  Widget build(BuildContext context) {
-    Color bg;
-    Color text = Colors.white;
-    switch (life.toLowerCase()) {
-      case 'hidup':
-        bg = const Color(0xFF4E46B4); // Primary color
-        break;
-      default:
-        bg = Colors.grey.shade300;
-        text = Colors.black87;
-    }
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-      decoration: BoxDecoration(
-        color: bg,
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(Icons.person, size: 14, color: text),
-          const SizedBox(width: 6),
-          Text(
-            life,
-            style: TextStyle(
-              color: text,
-              fontSize: 12,
-              fontWeight: FontWeight.w600,
-            ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(icon, size: 18, color: buttonColor),
+              const SizedBox(width: 6),
+              Text(
+                label,
+                style: TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500,
+                  color: buttonColor,
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
