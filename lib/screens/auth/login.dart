@@ -1,10 +1,10 @@
 import 'dart:math' show max;
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jawara_pintar_kel_5/constants/constant_colors.dart';
 import 'package:jawara_pintar_kel_5/widget/login_button.dart';
+import 'package:jawara_pintar_kel_5/widget/system_ui_style.dart';
 import 'package:jawara_pintar_kel_5/widget/text_input_login.dart';
 import 'package:moon_design/moon_design.dart';
 
@@ -33,19 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final backgroundColor = Theme.of(context).scaffoldBackgroundColor;
-    final themeBrightness = Theme.of(context).brightness;
-    final overlayIconBrightness = themeBrightness == Brightness.dark
-        ? Brightness.light
-        : Brightness.dark;
-
-    return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle(
-        statusBarColor: backgroundColor,
-        systemNavigationBarColor: backgroundColor,
-        statusBarIconBrightness: overlayIconBrightness,
-        systemNavigationBarIconBrightness: overlayIconBrightness,
-      ),
+    return SystemUiStyle(
       child: Scaffold(
         body: LayoutBuilder(
           builder: (context, constraints) {
