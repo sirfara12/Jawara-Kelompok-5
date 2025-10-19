@@ -5,25 +5,10 @@ import 'package:jawara_pintar_kel_5/constants/iconify.dart';
 import 'package:jawara_pintar_kel_5/widget/bottom_app_bar_item.dart';
 import 'package:moon_design/moon_design.dart';
 
-class AdminLayout extends StatelessWidget {
-  final Widget body;
-  final int activeIndex;
-  final String? title;
-  final bool showBackButton;
-  final VoidCallback? onBackPressed;
-  final List<Widget>? appBarActions;
-  final bool showBottomNav;
+class AdminLayout extends StatefulWidget {
+  final StatefulNavigationShell navigationShell;
 
-  AdminLayout({
-    super.key,
-    required this.body,
-    required this.activeIndex,
-    this.title,
-    this.showBackButton = false,
-    this.onBackPressed,
-    this.appBarActions,
-    this.showBottomNav = true,
-  });
+  const AdminLayout({super.key, required this.navigationShell});
 
   @override
   State<AdminLayout> createState() => _AdminLayoutState();
@@ -67,80 +52,26 @@ class _AdminLayoutState extends State<AdminLayout>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: title != null
-          ? AppBar(
-              centerTitle: false,
-              elevation: 0,
-              backgroundColor: Colors.white,
-              foregroundColor: Colors.black,
-              automaticallyImplyLeading: false,
-              leading: showBackButton
-                  ? IconButton(
-                      onPressed: onBackPressed ?? () => context.pop(),
-                      icon: const Icon(Icons.chevron_left, color: Colors.black),
-                    )
-                  : null,
-              title: Text(
-                title!,
-                style: const TextStyle(fontWeight: FontWeight.bold),
-              ),
-              actions: appBarActions,
-            )
-          : null,
-      body: SafeArea(child: body),
-      bottomNavigationBar: showBottomNav
-          ? BottomAppBar(
-              color: Colors.white,
-              height: 72,
-              padding: const EdgeInsets.only(bottom: 16),
-              // shape: const CircularNotchedRectangle(),
-              // notchMargin: 8,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  BottomAppBarItem(
-                    icon: Icon(MoonIcons.generic_home_32_regular),
-                    label: tabs[0],
-                    active: activeIndex == 0,
-                    onTap: () => context.go('/admin/dashboard'),
-                  ),
-                  BottomAppBarItem(
-                    icon: Iconify(IconifyConstants.fluentPeopleLight, size: 24),
-                    label: tabs[1],
-                    active: activeIndex == 1,
-                    onTap: () => context.go('/admin/penduduk/daftar-warga'),
-                  ),
-                  BottomAppBarItem(
-                    icon: Iconify(
-                      IconifyConstants.letsIconMoneyLight,
-                      size: 24,
-                    ),
-                    label: tabs[2],
-                    active: activeIndex == 2,
-                    onTap: () => context.go('/admin/keuangan'),
-                  ),
-                  BottomAppBarItem(
-                    icon: Iconify(
-                      IconifyConstants.arcticonActiviyManager,
-                      size: 24,
-                    ),
-                    label: tabs[3],
-                    active: activeIndex == 3,
-                    onTap: () {},
-                  ),
-                  BottomAppBarItem(
-                    icon: Iconify(
-                      IconifyConstants.fluentMoreHorizontalREG,
-                      size: 24,
-                    ),
-                    label: tabs[4],
-                    active: activeIndex == 4,
-                    onTap: () {},
-                  ),
-                ],
-              ),
-            )
-          : null,
+      body: SafeArea(
+        child: FadeTransition(opacity: _fade, child: widget.navigationShell),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        color: Colors.white,
+        height: 72,
+        padding: const EdgeInsets.only(bottom: 16),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: List.generate(
+            tabs.length,
+            (index) => BottomAppBarItem(
+              icon: tabs.values.elementAt(index),
+              label: tabs.keys.elementAt(index),
+              active: widget.navigationShell.currentIndex == index,
+              onTap: () => _goTo(index),
+            ),
+          ).toList(),
+        ),
+      ),
     );
   }
 
