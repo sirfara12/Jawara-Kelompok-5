@@ -22,9 +22,18 @@ class DashboardCountCard extends StatelessWidget {
     return Container(
       width: width,
       height: height,
-      decoration: BoxDecoration(
+      decoration: ShapeDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
+        shape: MoonSquircleBorder(
+          borderRadius: BorderRadius.circular(8).squircleBorderRadius(context),
+        ),
+        shadows: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.06),
+            blurRadius: 8,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
       child: Column(
