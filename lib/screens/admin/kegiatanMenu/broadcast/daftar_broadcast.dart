@@ -255,20 +255,41 @@ class _DaftarBroadcastScreenState extends State<DaftarBroadcastScreen> {
     }
   }
   Widget _buildActionButton(IconData icon, String label, VoidCallback onTap) {
-    return InkWell(
-      onTap: onTap,
-      child: Row(
-        children: [
-          Icon(icon, size: 16, color: Colors.grey.shade600),
-          const SizedBox(width: 4),
-          Text(
-            label,
-            style: TextStyle(fontSize: 14, color: Colors.grey.shade600),
+  return InkWell(
+    onTap: onTap,
+    borderRadius: BorderRadius.circular(8),
+    child: Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+      decoration: BoxDecoration(
+        color: const Color(0xFFF5F2FA),
+        borderRadius: BorderRadius.circular(8),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.15),
+            spreadRadius: 1,
+            blurRadius: 4,
+            offset: const Offset(0, 2),
           ),
         ],
       ),
-    );
-  }
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, size: 16, color: const Color(0xFF5F5D70)),
+          const SizedBox(width: 4),
+          Text(
+            label,
+            style: const TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+              color: Color(0xFF5F5D70),
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}
 
   Widget _buildBroadcastCard(
     KegiatanBroadcast kegiatan, {
@@ -316,7 +337,7 @@ class _DaftarBroadcastScreenState extends State<DaftarBroadcastScreen> {
 
               // Tombol Aksi
               Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   _buildActionButton(
                       Icons.remove_red_eye_outlined, "Detail", onDetail),
@@ -332,65 +353,93 @@ class _DaftarBroadcastScreenState extends State<DaftarBroadcastScreen> {
       ),
     );
   }
+@override
+Widget build(BuildContext context) {
+  final filteredList = _filterBroadcast();
+  const primaryColor = Colors.deepPurple;
 
-
-  @override
-  Widget build(BuildContext context) {
-    final filteredList = _filterBroadcast();
-    const Color primaryColor = Color(0xFF673AB7);
-
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Broadcast',
-            style: TextStyle(fontWeight: FontWeight.bold)),
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
-        elevation: 1,
+  return Scaffold(
+    appBar: AppBar(
+      leading: IconButton(
+        icon: const Icon(Icons.arrow_back_ios, color: Colors.black, size: 20),
+        onPressed: () => Navigator.of(context).pop(),
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 8.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: SizedBox(
-                    height: 50,
-                    child: TextField(
-                      controller: _searchController,
-                      onChanged: (value) {
-                        setState(() {
-                          _searchQuery = value;
-                        });
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Search Name', 
-                        prefixIcon:
-                            const Icon(Icons.search, color: Colors.grey),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                          borderSide: BorderSide.none,
-                        ),
-                        filled: true,
-                        fillColor: Colors.grey.shade100,
-                        hintStyle: TextStyle(color: Colors.grey.shade600),
-                        contentPadding: EdgeInsets.zero,
+      title: const Text(
+        'Broadcast',
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          color: Colors.black,
+          fontSize: 20,
+        ),
+      ),
+      backgroundColor: Colors.white,
+      elevation: 0,
+      toolbarHeight: 50,
+    ),
+
+    body: Column(
+      children: [
+        // 🔍 Search Bar + Filter Button
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+          child: Row(
+            children: [
+              Expanded(
+                child: Container(
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black12.withOpacity(0.05),
+                        blurRadius: 4,
+                        offset: const Offset(0, 2),
                       ),
+                    ],
+                  ),
+                  child: TextField(
+                    controller: _searchController,
+                    onChanged: (value) {
+                      setState(() {
+                        _searchQuery = value;
+                      });
+                    },
+                    decoration: InputDecoration(
+                      hintText: 'Cari Berdasarkan Judul',
+                      hintStyle: TextStyle(color: Colors.grey.shade500),
+                      prefixIcon: const Icon(Icons.search, color: Colors.grey),
+                      border: InputBorder.none,
+                      contentPadding:
+                          const EdgeInsets.symmetric(vertical: 10),
                     ),
                   ),
                 ),
-                const SizedBox(width: 8),
-
-                // Tombol Filter
-                IconButton(
-                  icon: Icon(Icons.tune, color: Colors.grey.shade700, size: 28),
+              ),
+              const SizedBox(width: 8),
+              Container(
+                height: 40,
+                width: 40,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black12.withOpacity(0.05),
+                      blurRadius: 4,
+                      offset: const Offset(0, 2),
+                    ),
+                  ],
+                ),
+                child: IconButton(
+                  icon: const Icon(Icons.tune, color: Colors.black87, size: 22),
                   onPressed: () => _showFilterModal(context),
                   tooltip: 'Filter',
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-
+        ),
           // Daftar Kegiatan
           Expanded(
             child: filteredList.isEmpty
