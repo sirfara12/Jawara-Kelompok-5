@@ -81,7 +81,7 @@ class _SemuaPemasukanScreenState extends State<SemuaPemasukanScreen> {
           icon: const Icon(Icons.chevron_left, color: Colors.black),
         ),
         title: Text(
-          "Laporan Keuangan",
+          "Semua Pemasukkan",
           style: MoonTokens.light.typography.heading.text20.copyWith(
             fontWeight: FontWeight.w700,
           ),

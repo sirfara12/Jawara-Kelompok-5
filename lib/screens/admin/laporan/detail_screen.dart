@@ -5,7 +5,12 @@ import 'package:moon_design/moon_design.dart';
 
 class LaporanDetailScreen extends StatelessWidget {
   final LaporanKeuanganModel data;
-  const LaporanDetailScreen({super.key, required this.data});
+  final bool isPemasukkan;
+  const LaporanDetailScreen({
+    super.key,
+    required this.data,
+    this.isPemasukkan = true,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +25,7 @@ class LaporanDetailScreen extends StatelessWidget {
           icon: const Icon(Icons.chevron_left, color: Colors.black),
         ),
         title: Text(
-          'Detail Pemasukan',
+          'Detail ${isPemasukkan ? 'Pemasukan' : 'Pengeluaran'}',
           style: MoonTokens.light.typography.heading.text20.copyWith(
             fontWeight: FontWeight.w700,
           ),
