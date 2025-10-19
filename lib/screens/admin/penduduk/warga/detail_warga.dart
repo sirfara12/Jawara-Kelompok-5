@@ -7,8 +7,6 @@ class DetailWargaPage extends StatelessWidget {
   final Map<String, String> warga;
   const DetailWargaPage({super.key, required this.warga});
 
-  Color get primary => const Color(0xFF4E46B4);
-
   @override
   Widget build(BuildContext context) {
     final name = warga['name'] ?? '-';
@@ -191,8 +189,6 @@ class DetailWargaPage extends StatelessWidget {
 
 // ========================= More Menu & Dialog =========================
 
-enum _MoreMenuAction { edit, delete }
-
 class _MoreMenu extends StatelessWidget {
   final String wargaName;
   final VoidCallback onEdit;
@@ -204,39 +200,108 @@ class _MoreMenu extends StatelessWidget {
     required this.onDeleteConfirmed,
   });
 
+  void _showOptionsBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.white,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) {
+        return SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Handle bar
+                Center(
+                  child: Container(
+                    width: 40,
+                    height: 4,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[300],
+                      borderRadius: BorderRadius.circular(2),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                // Title
+                const Text(
+                  'Opsi',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 16),
+                const Divider(height: 1),
+                // Edit option
+                ListTile(
+                  leading: Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF4E46B4).withValues(alpha: 0.12),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: const Icon(
+                      Icons.edit_outlined,
+                      color: Color(0xFF4E46B4),
+                      size: 22,
+                    ),
+                  ),
+                  title: const Text(
+                    'Edit Data',
+                    style: TextStyle(fontWeight: FontWeight.w600),
+                  ),
+                  subtitle: const Text('Ubah data warga'),
+                  onTap: () {
+                    Navigator.pop(context);
+                    onEdit();
+                  },
+                ),
+                const Divider(height: 1),
+                // Delete option
+                ListTile(
+                  leading: Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: Colors.red.withValues(alpha: 0.12),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: const Icon(
+                      Icons.delete_outline,
+                      color: Colors.red,
+                      size: 22,
+                    ),
+                  ),
+                  title: const Text(
+                    'Hapus Data',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      color: Colors.red,
+                    ),
+                  ),
+                  subtitle: const Text('Hapus data warga secara permanen'),
+                  onTap: () async {
+                    Navigator.pop(context);
+                    await onDeleteConfirmed();
+                  },
+                ),
+                const SizedBox(height: 8),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return PopupMenuButton<_MoreMenuAction>(
+    return IconButton(
       tooltip: 'Lainnya',
       icon: const Icon(Icons.more_vert, color: Colors.black),
-      onSelected: (value) async {
-        switch (value) {
-          case _MoreMenuAction.edit:
-            onEdit();
-            break;
-          case _MoreMenuAction.delete:
-            await onDeleteConfirmed();
-            break;
-        }
-      },
-      itemBuilder: (context) => [
-        const PopupMenuItem(
-          value: _MoreMenuAction.edit,
-          child: ListTile(
-            dense: true,
-            leading: Icon(Icons.edit_outlined),
-            title: Text('Edit'),
-          ),
-        ),
-        const PopupMenuItem(
-          value: _MoreMenuAction.delete,
-          child: ListTile(
-            dense: true,
-            leading: Icon(Icons.delete_outline, color: Colors.red),
-            title: Text('Hapus', style: TextStyle(color: Colors.red)),
-          ),
-        ),
-      ],
+      onPressed: () => _showOptionsBottomSheet(context),
     );
   }
 }

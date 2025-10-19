@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:jawara_pintar_kel_5/providers/admin_dashboard_provider.dart';
 import 'package:jawara_pintar_kel_5/screens/admin/dashboard/kegiatan.dart';
 import 'package:jawara_pintar_kel_5/screens/admin/dashboard/kependudukan.dart';
@@ -51,8 +52,9 @@ class _AdminDashboardState extends State<AdminDashboard> {
             spacing: 8,
             children: [
               Padding(
-                padding: const EdgeInsets.only(right: 24.0, left: 24.0, top: 6),
+                padding: const EdgeInsets.only(right: 16.0, left: 16.0, top: 6),
                 child: Column(
+                  spacing: 8.0,
                   children: [
                     Padding(
                       padding: const EdgeInsets.symmetric(
@@ -64,23 +66,29 @@ class _AdminDashboardState extends State<AdminDashboard> {
                         children: [
                           Text(
                             "Dashboard",
-                            style: MoonTokens.light.typography.heading.text20,
+                            style: MoonTokens.light.typography.heading.text20
+                                .copyWith(fontWeight: FontWeight.w700),
                           ),
-                          Container(
-                            width: 44,
-                            height: 44,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.grey,
+                          Material(
+                            color: Colors.grey,
+                            shape: const CircleBorder(),
+                            clipBehavior: Clip.antiAlias,
+                            child: InkWell(
+                              onTap: () => context.goNamed('login'),
+                              child: const SizedBox(
+                                width: 44,
+                                height: 44,
+                                child: Center(child: Icon(Icons.person)),
+                              ),
                             ),
-                            child: Center(child: Icon(Icons.person)),
                           ),
                         ],
                       ),
                     ),
+
                     MoonSegmentedControl(
                       isExpanded: true,
-                      segmentedControlSize: MoonSegmentedControlSize.sm,
+                      segmentedControlSize: MoonSegmentedControlSize.md,
                       onSegmentChanged: (value) {
                         provider.page = value;
                         if (_pageController.hasClients) {
@@ -94,9 +102,20 @@ class _AdminDashboardState extends State<AdminDashboard> {
                       segments: provider.pages
                           .map(
                             (key) => Segment(
-                              label: Text(
-                                key,
-                                style: MoonTokens.light.typography.body.text14,
+                              segmentStyle: SegmentStyle(
+                                selectedSegmentColor: Theme.of(
+                                  context,
+                                ).primaryColor,
+                                selectedTextColor: Colors.white,
+                              ),
+                              label: Flexible(
+                                child: Text(
+                                  key,
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                  style: MoonTokens.light.typography.body.text12
+                                      .copyWith(fontWeight: FontWeight.w700),
+                                ),
                               ),
                             ),
                           )

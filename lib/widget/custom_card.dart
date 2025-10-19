@@ -23,9 +23,9 @@ class CustomCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: ShapeDecoration(
-        color: color ?? Theme.of(context).colorScheme.surface,
+        color: color ?? MoonTokens.light.colors.goten,
         shape: MoonSquircleBorder(
-          borderRadius: BorderRadius.circular(12).squircleBorderRadius(context),
+          borderRadius: BorderRadius.circular(8).squircleBorderRadius(context),
         ),
         shadows: [
           BoxShadow(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jawara_pintar_kel_5/constants/constant_colors.dart';
 import 'package:jawara_pintar_kel_5/router.dart';
 import 'package:moon_design/moon_design.dart';
 
@@ -15,6 +16,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Jawara Pintar',
       theme: ThemeData.light().copyWith(
+        colorScheme: ThemeData.light().colorScheme.copyWith(
+          primary: ConstantColors.primary,
+        ),
+        primaryColor: ConstantColors.primary,
         extensions: <ThemeExtension<dynamic>>[
           MoonTheme(tokens: MoonTokens.light),
         ],
