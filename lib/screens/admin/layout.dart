@@ -113,7 +113,7 @@ class _AdminLayoutState extends State<AdminLayout>
       if (!mounted) return;
 
       // Switch branch while content is invisible
-      widget.navigationShell.goBranch(index, initialLocation: false);
+      widget.navigationShell.goBranch(index, initialLocation: true);
 
       // Give a frame for the new content to layout before fade-in
       await Future.delayed(const Duration(milliseconds: 16));
