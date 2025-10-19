@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jawara_pintar_kel_5/utils.dart' show getPrimaryColor;
 import 'package:jawara_pintar_kel_5/widget/form/section_card.dart';
 import 'package:jawara_pintar_kel_5/widget/form/labeled_text_field.dart';
 import 'package:jawara_pintar_kel_5/widget/form/labeled_dropdown.dart';
@@ -14,8 +15,6 @@ class TambahWargaPage extends StatefulWidget {
 }
 
 class _TambahWargaPageState extends State<TambahWargaPage> {
-  final Color primary = const Color(0xFF4E46B4);
-
   // Controllers
   final _namaCtl = TextEditingController();
   final _nikCtl = TextEditingController();
@@ -42,9 +41,23 @@ class _TambahWargaPageState extends State<TambahWargaPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: const Color(0xFFF7F7FB),
-      child: ListView(
+    return Scaffold(
+      backgroundColor: const Color(0xFFF7F7FB),
+      appBar: AppBar(
+        centerTitle: false,
+        elevation: 0,
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+        leading: IconButton(
+          onPressed: () => context.pop(),
+          icon: const Icon(Icons.chevron_left, color: Colors.black),
+        ),
+        title: const Text(
+          'Tambah Warga',
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+        ),
+      ),
+      body: ListView(
         padding: const EdgeInsets.only(bottom: 24),
         children: [
           // Data Diri
@@ -223,7 +236,7 @@ class _TambahWargaPageState extends State<TambahWargaPage> {
               width: double.infinity,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: primary,
+                  backgroundColor: getPrimaryColor(context),
                   foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   shape: RoundedRectangleBorder(

@@ -80,7 +80,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       ),
       body: Padding(
-        padding: const EdgeInsets.only(top: 4.0, bottom: 24.0),
+        padding: const EdgeInsets.only(top: 4.0),
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.only(right: 24, left: 24),
@@ -302,6 +302,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   onTap: () => context.go('/login'),
                   withColor: false,
                 ),
+                const SizedBox(height: 24),
               ],
             ),
           ),

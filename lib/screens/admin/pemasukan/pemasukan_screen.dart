@@ -4,7 +4,9 @@ import 'package:jawara_pintar_kel_5/screens/admin/pemasukan/detail_iuran_screen.
 import 'package:jawara_pintar_kel_5/screens/admin/pemasukan/edit_iuran_screen.dart';
 
 class PemasukanScreen extends StatefulWidget {
-  const PemasukanScreen({super.key});
+  final int initialTab;
+
+  const PemasukanScreen({super.key, this.initialTab = 0});
 
   @override
   State<PemasukanScreen> createState() => _PemasukanScreenState();
@@ -20,7 +22,11 @@ class _PemasukanScreenState extends State<PemasukanScreen>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 4, vsync: this);
+    _tabController = TabController(
+      length: 4,
+      vsync: this,
+      initialIndex: widget.initialTab,
+    );
     _iuranList = IuranModel.getSampleData();
     _filteredIuranList = _iuranList;
 
@@ -55,17 +61,15 @@ class _PemasukanScreenState extends State<PemasukanScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        centerTitle: false,
         elevation: 0,
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+        automaticallyImplyLeading: false,
         title: const Text(
           'Pemasukan',
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
         actions: [
           IconButton(
@@ -76,54 +80,66 @@ class _PemasukanScreenState extends State<PemasukanScreen>
           ),
         ],
       ),
-      body: Column(
+      body: Stack(
         children: [
-          // Tabs
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: TabBar(
-              controller: _tabController,
-              indicatorColor: const Color(0xFF6366F1),
-              indicatorWeight: 3,
-              labelColor: const Color(0xFF6366F1),
-              unselectedLabelColor: Colors.black54,
-              labelStyle: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w600,
+          Column(
+            children: [
+              // Tabs
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
+                child: TabBar(
+                  controller: _tabController,
+                  indicatorColor: const Color(0xFF6366F1),
+                  indicatorWeight: 3,
+                  labelColor: const Color(0xFF6366F1),
+                  unselectedLabelColor: Colors.black54,
+                  labelStyle: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  unselectedLabelStyle: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.normal,
+                  ),
+                  tabs: const [
+                    Tab(text: 'Kategori'),
+                    Tab(text: 'Tagih Iuran'),
+                    Tab(text: 'Tagihan'),
+                    Tab(text: 'Pemasukan Lain'),
+                  ],
+                ),
               ),
-              unselectedLabelStyle: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.normal,
-              ),
-              tabs: const [
-                Tab(text: 'Kategori Iuran'),
-                Tab(text: 'Tagih Iuran'),
-                Tab(text: 'Tagihan'),
-                Tab(text: 'Pemasukan'),
-              ],
-            ),
-          ),
 
-          // Tab Content
-          Expanded(
-            child: TabBarView(
-              controller: _tabController,
-              children: [
-                _buildKategoriIuranTab(),
-                _buildPlaceholderTab('Tagihan Iuran'),
-                _buildPlaceholderTab('Tagihan'),
-                _buildPlaceholderTab('Pemasukan'),
-              ],
+              // Tab Content
+              Expanded(
+                child: TabBarView(
+                  controller: _tabController,
+                  children: [
+                    _buildKategoriIuranTab(),
+                    _buildPlaceholderTab('Tagihan Iuran'),
+                    _buildPlaceholderTab('Tagihan'),
+                    _buildPlaceholderTab('Pemasukan'),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          // Floating Action Button
+          Positioned(
+            right: 16,
+            bottom: 16,
+            child: FloatingActionButton(
+              onPressed: () {
+                _showAddIuranDialog();
+              },
+              backgroundColor: const Color(0xFF6366F1),
+              child: const Icon(Icons.add, color: Colors.white),
             ),
           ),
         ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _showAddIuranDialog();
-        },
-        backgroundColor: const Color(0xFF6366F1),
-        child: const Icon(Icons.add, color: Colors.white),
       ),
     );
   }

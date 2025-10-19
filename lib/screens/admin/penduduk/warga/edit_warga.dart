@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jawara_pintar_kel_5/utils.dart' show getPrimaryColor;
 import 'package:jawara_pintar_kel_5/widget/form/date_picker_field.dart';
 import 'package:jawara_pintar_kel_5/widget/form/labeled_dropdown.dart';
 import 'package:jawara_pintar_kel_5/widget/form/labeled_text_field.dart';
@@ -15,8 +16,6 @@ class EditWargaPage extends StatefulWidget {
 }
 
 class _EditWargaPageState extends State<EditWargaPage> {
-  final Color primary = const Color(0xFF4E46B4);
-
   // Controllers: kosongkan agar placeholder menampilkan nilai lama.
   final _namaCtl = TextEditingController();
   final _nikCtl = TextEditingController();
@@ -50,9 +49,23 @@ class _EditWargaPageState extends State<EditWargaPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: const Color(0xFFF7F7FB),
-      child: ListView(
+    return Scaffold(
+      backgroundColor: const Color(0xFFF7F7FB),
+      appBar: AppBar(
+        centerTitle: false,
+        elevation: 0,
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+        leading: IconButton(
+          onPressed: () => context.pop(),
+          icon: const Icon(Icons.chevron_left, color: Colors.black),
+        ),
+        title: const Text(
+          'Edit Warga',
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+        ),
+      ),
+      body: ListView(
         padding: const EdgeInsets.only(bottom: 24),
         children: [
           SectionCard(
@@ -249,7 +262,7 @@ class _EditWargaPageState extends State<EditWargaPage> {
               width: double.infinity,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: primary,
+                  backgroundColor: getPrimaryColor(context),
                   foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   shape: RoundedRectangleBorder(
