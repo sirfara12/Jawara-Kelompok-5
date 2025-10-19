@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iconify_flutter/iconify_flutter.dart' show Iconify;
+import 'package:jawara_pintar_kel_5/constants/constant_colors.dart';
 import 'package:jawara_pintar_kel_5/constants/iconify.dart';
 import 'package:jawara_pintar_kel_5/widget/bottom_app_bar_item.dart';
 import 'package:moon_design/moon_design.dart';
@@ -20,12 +21,15 @@ class _AdminLayoutState extends State<AdminLayout>
   late final Animation<double> _fade;
   bool _isAnimating = false;
 
-  final Map<String, Widget> tabs = {
-    'Rumah': Icon(MoonIcons.generic_home_32_regular),
-    'Penduduk': Iconify(IconifyConstants.fluentPeopleLight, size: 24),
-    'Keuangan': Iconify(IconifyConstants.letsIconMoneyLight, size: 24),
-    'Kegiatan': Iconify(IconifyConstants.arcticonActiviyManager, size: 24),
-    'Lainnya': Iconify(IconifyConstants.fluentMoreHorizontalREG, size: 24),
+  Widget getIconify(String icon, Color color) =>
+      Iconify(icon, size: 24, color: color);
+
+  final Map<String, String> tabs = {
+    'Rumah': '',
+    'Penduduk': IconifyConstants.fluentPeopleLight,
+    'Keuangan': IconifyConstants.letsIconMoneyLight,
+    'Kegiatan': IconifyConstants.arcticonActiviyManager,
+    'Lainnya': IconifyConstants.fluentMoreHorizontalREG,
   };
 
   @override
@@ -64,7 +68,15 @@ class _AdminLayoutState extends State<AdminLayout>
           children: List.generate(
             tabs.length,
             (index) => BottomAppBarItem(
-              icon: tabs.values.elementAt(index),
+              icon: index == 0
+                  ? Icon(MoonIcons.generic_home_32_regular)
+                  : Iconify(
+                      tabs.values.elementAt(index),
+                      size: 24,
+                      color: widget.navigationShell.currentIndex == index
+                          ? ConstantColors.primary
+                          : Colors.black,
+                    ),
               label: tabs.keys.elementAt(index),
               active: widget.navigationShell.currentIndex == index,
               onTap: () => _goTo(index),
