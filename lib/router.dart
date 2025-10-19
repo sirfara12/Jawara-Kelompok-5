@@ -41,6 +41,24 @@ import 'package:jawara_pintar_kel_5/screens/admin/pengeluaran/tambah_pengeluaran
 import 'package:jawara_pintar_kel_5/screens/auth/login.dart';
 import 'package:jawara_pintar_kel_5/screens/auth/register.dart';
 
+import 'package:jawara_pintar_kel_5/screens/admin/kegiatanMenu/kegiatan_screen.dart';
+import 'package:jawara_pintar_kel_5/screens/admin/kegiatanMenu/kegiatan/daftar_kegiatan_screen.dart';
+import 'package:jawara_pintar_kel_5/screens/admin/kegiatanMenu/kegiatan/tambah_kegiatan_screen.dart';
+import 'package:jawara_pintar_kel_5/screens/admin/kegiatanMenu/kegiatan/edit_kegiatan_screen.dart';
+import 'package:jawara_pintar_kel_5/screens/admin/kegiatanMenu/kegiatan/detail_kegiatan_screen.dart';
+
+import 'package:jawara_pintar_kel_5/screens/admin/kegiatanMenu/broadcast/daftar_broadcast.dart';
+import 'package:jawara_pintar_kel_5/screens/admin/kegiatanMenu/broadcast/tambah_broadcast.dart';
+import 'package:jawara_pintar_kel_5/screens/admin/kegiatanMenu/broadcast/detail_broadcast_screen.dart';
+import 'package:jawara_pintar_kel_5/screens/admin/kegiatanMenu/broadcast/edit_broadcast_screen.dart';
+
+import 'package:jawara_pintar_kel_5/screens/admin/kegiatanMenu/pesanwarga/pesanwarga_tab.dart';
+import 'package:jawara_pintar_kel_5/screens/admin/kegiatanMenu/pesanwarga/edit_pesan_warga_screen.dart';
+import 'package:jawara_pintar_kel_5/screens/admin/kegiatanMenu/pesanwarga/detail_pesan_warga_screen.dart';
+
+
+import 'package:jawara_pintar_kel_5/screens/admin/kegiatanMenu/logaktivitas/logaktivitas_tab.dart';
+
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 
 final router = GoRouter(
@@ -266,7 +284,85 @@ final router = GoRouter(
             ),
           ],
         ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: '/admin/kegiatan',
+              name: 'kegiatanMenu',
+              builder: (context, state) => const KegiatanScreen(),
+              routes: [
+                GoRoute(
+                  path: 'daftar',
+                  builder: (context, state) => const DaftarKegiatanScreen(),
+                ),
+                GoRoute(
+                  path: 'tambah',
+                  builder: (context, state) => const TambahKegiatanScreen(),
+                ),
+                GoRoute(
+                  path: 'detail',
+                  builder: (context, state) {
+                    final kegiatanData = state.extra as Map<String, String>? ?? {};
+                    return DetailKegiatanScreen(kegiatan: kegiatanData);
+                  },
+                ),
+                GoRoute(
+                  path: 'edit',
+                  builder: (context, state) {
+                    final kegiatanData = state.extra as Map<String, String>? ?? {};
+                    return EditKegiatanScreen(kegiatan: kegiatanData);
+                  },
+                ),
+                GoRoute(
+                  path: 'broadcast/daftar',
+                  name: 'broadcastDaftar',
+                  builder: (context, state) => const DaftarBroadcastScreen(),
+                ),
+                GoRoute(
+                  path: 'broadcast/tambah',
+                  name: 'broadcastTambah',
+                  builder: (context, state) => const TambahBroadcastScreen(),
+                ),
+                GoRoute(
+                  path: 'broadcast/detail/:judul',
+                  name: 'broadcastDetail',
+                  builder: (context, state) {
+                    final _ = state.pathParameters['judul']!;
+                    final broadcastData = state.extra as KegiatanBroadcast?;
+                    if (broadcastData == null) return const DaftarBroadcastScreen();
+                    return DetailBroadcastScreen(broadcastData: broadcastData);
+                  },
+                ),
+                GoRoute(
+                  path: 'broadcast/edit/:judul',
+                  name: 'broadcastEdit',
+                  builder: (context, state) {
+                    final _ = state.pathParameters['judul']!;
+                    final broadcastData = state.extra as Map<String, dynamic>?;
+                    if (broadcastData == null || broadcastData['data'] == null) {
+                      return const DaftarBroadcastScreen();
+                    }
+                    return EditBroadcastScreen(
+                      initialBroadcastData: broadcastData['data'] as KegiatanBroadcast,
+                    );
+                  },
+                ),
+               GoRoute(
+                  path: 'pesanwarga',
+                  name: 'pesanWarga',
+                  builder: (context, state) => const PesanWargaScreen(),
+                ),
+                GoRoute(
+                  path: 'logaktivitas',
+                  name: 'logAktivitas',
+                  builder: (context, state) => const LogAktivitasScreen(),
+                ),
+              ],
+            ),
+          ],
+        ),
       ],
     ),
   ],
 );
+                
