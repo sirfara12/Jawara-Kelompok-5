@@ -33,13 +33,13 @@ class _AdminLayoutState extends State<AdminLayout>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 180),
-      reverseDuration: const Duration(milliseconds: 180),
+      duration: const Duration(milliseconds: 100),
+      reverseDuration: const Duration(milliseconds: 100),
     );
     _fade = CurvedAnimation(
       parent: ReverseAnimation(_controller),
-      curve: Curves.easeOut,
-      reverseCurve: Curves.easeIn,
+      curve: Curves.easeOutSine,
+      reverseCurve: Curves.easeInSine,
     );
   }
 

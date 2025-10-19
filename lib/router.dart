@@ -19,8 +19,16 @@ final router = GoRouter(
   navigatorKey: _rootNavigatorKey,
   routes: [
     GoRoute(path: '/', redirect: (context, state) => '/login'),
-    GoRoute(path: '/login', builder: (context, state) => LoginScreen()),
-    GoRoute(path: '/register', builder: (context, state) => RegisterScreen()),
+    GoRoute(
+      path: '/login',
+      name: 'login',
+      builder: (context, state) => LoginScreen(),
+    ),
+    GoRoute(
+      path: '/register',
+      name: 'register',
+      builder: (context, state) => RegisterScreen(),
+    ),
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) =>
           AdminLayout(navigationShell: navigationShell),
@@ -29,6 +37,7 @@ final router = GoRouter(
           routes: [
             GoRoute(
               path: '/admin/dashboard',
+              name: 'admin_dashboard',
               builder: (context, state) => AdminDashboard(),
             ),
           ],
