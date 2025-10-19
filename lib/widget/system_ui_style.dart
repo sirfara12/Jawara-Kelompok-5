@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 class SystemUiStyle extends StatelessWidget {
   final Widget child;
   final Color? backgroundColor;
+  final Color? systemNavigationBarColor;
   final Brightness? overlayIconBrightness;
 
   const SystemUiStyle({
@@ -11,6 +12,7 @@ class SystemUiStyle extends StatelessWidget {
     required this.child,
     this.backgroundColor,
     this.overlayIconBrightness,
+    this.systemNavigationBarColor,
   });
 
   @override
@@ -25,7 +27,7 @@ class SystemUiStyle extends StatelessWidget {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle(
         statusBarColor: bgColor,
-        systemNavigationBarColor: bgColor,
+        systemNavigationBarColor: systemNavigationBarColor ?? bgColor,
         statusBarIconBrightness: brightness,
         systemNavigationBarIconBrightness: brightness,
       ),
