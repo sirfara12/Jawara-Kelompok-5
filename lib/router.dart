@@ -24,6 +24,12 @@ import 'package:jawara_pintar_kel_5/screens/admin/penduduk/rumah/edit_rumah.dart
 import 'package:jawara_pintar_kel_5/screens/admin/penduduk/warga/detail_warga.dart';
 import 'package:jawara_pintar_kel_5/screens/admin/penduduk/warga/tambah_warga.dart';
 import 'package:jawara_pintar_kel_5/screens/admin/penduduk/warga/edit_warga.dart';
+import 'package:jawara_pintar_kel_5/screens/admin/penduduk/penerimaan/daftar_penerimaan_warga.dart';
+import 'package:jawara_pintar_kel_5/screens/admin/penduduk/penerimaan/detail_penerimaan_warga.dart';
+import 'package:jawara_pintar_kel_5/screens/admin/penduduk/keluarga/daftar_keluarga.dart';
+import 'package:jawara_pintar_kel_5/screens/admin/penduduk/keluarga/detail_keluarga.dart';
+import 'package:jawara_pintar_kel_5/screens/admin/penduduk/keluarga/daftar_mutasi_keluarga.dart';
+import 'package:jawara_pintar_kel_5/screens/admin/penduduk/keluarga/tambah_mutasi_keluarga.dart';
 // import 'package:jawara_pintar_kel_5/screens/admin/keuangan/keuangan_menu_screen.dart';
 // import 'package:jawara_pintar_kel_5/screens/admin/pemasukan/pemasukan_screen.dart';
 import 'package:jawara_pintar_kel_5/screens/admin/lainnya/lainnya_menu_screen.dart';
@@ -148,6 +154,43 @@ final router = GoRouter(
                     final data = state.extra as Map<String, String>? ?? {};
                     return EditWargaPage(warga: data);
                   },
+                ),
+                GoRoute(
+                  path: 'daftar-penerimaan',
+                  name: 'penerimaanList',
+                  builder: (context, state) =>
+                      const DaftarPenerimaanWargaPage(),
+                ),
+                GoRoute(
+                  path: 'detail-penerimaan',
+                  name: 'penerimaanDetail',
+                  builder: (context, state) {
+                    final penerimaan = state.extra as PenerimaanWarga;
+                    return DetailPenerimaanWargaPage(penerimaan: penerimaan);
+                  },
+                ),
+                GoRoute(
+                  path: 'daftar-keluarga',
+                  name: 'keluargaList',
+                  builder: (context, state) => const DaftarKeluargaPage(),
+                ),
+                GoRoute(
+                  path: 'detail-keluarga',
+                  name: 'keluargaDetail',
+                  builder: (context, state) {
+                    final keluarga = state.extra as Keluarga;
+                    return DetailKeluargaPage(keluarga: keluarga);
+                  },
+                ),
+                GoRoute(
+                  path: 'daftar-mutasi-keluarga',
+                  name: 'mutasiKeluargaList',
+                  builder: (context, state) => const DaftarMutasiKeluargaPage(),
+                ),
+                GoRoute(
+                  path: 'tambah-mutasi-keluarga',
+                  name: 'mutasiKeluargaAdd',
+                  builder: (context, state) => const TambahMutasiKeluargaPage(),
                 ),
               ],
             ),
