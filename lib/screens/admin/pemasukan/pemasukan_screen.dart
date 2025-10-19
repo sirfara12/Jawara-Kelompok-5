@@ -4,7 +4,9 @@ import 'package:jawara_pintar_kel_5/screens/admin/pemasukan/detail_iuran_screen.
 import 'package:jawara_pintar_kel_5/screens/admin/pemasukan/edit_iuran_screen.dart';
 
 class PemasukanScreen extends StatefulWidget {
-  const PemasukanScreen({super.key});
+  final int initialTab;
+
+  const PemasukanScreen({super.key, this.initialTab = 0});
 
   @override
   State<PemasukanScreen> createState() => _PemasukanScreenState();
@@ -20,7 +22,11 @@ class _PemasukanScreenState extends State<PemasukanScreen>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 4, vsync: this);
+    _tabController = TabController(
+      length: 4,
+      vsync: this,
+      initialIndex: widget.initialTab,
+    );
     _iuranList = IuranModel.getSampleData();
     _filteredIuranList = _iuranList;
 
@@ -99,10 +105,10 @@ class _PemasukanScreenState extends State<PemasukanScreen>
                     fontWeight: FontWeight.normal,
                   ),
                   tabs: const [
-                    Tab(text: 'Kategori Iuran'),
+                    Tab(text: 'Kategori'),
                     Tab(text: 'Tagih Iuran'),
                     Tab(text: 'Tagihan'),
-                    Tab(text: 'Pemasukan'),
+                    Tab(text: 'Pemasukan Lain'),
                   ],
                 ),
               ),
