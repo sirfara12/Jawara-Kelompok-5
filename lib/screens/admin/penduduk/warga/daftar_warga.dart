@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jawara_pintar_kel_5/utils.dart' show getPrimaryColor;
 
 class DaftarWargaPage extends StatefulWidget {
   const DaftarWargaPage({super.key});
@@ -9,7 +10,6 @@ class DaftarWargaPage extends StatefulWidget {
 }
 
 class _DaftarWargaPageState extends State<DaftarWargaPage> {
-  final Color primary = const Color(0xFF4E46B4);
   final TextEditingController _searchController = TextEditingController();
   final FocusNode _searchFocusNode = FocusNode();
   String _query = '';
@@ -284,28 +284,28 @@ class _DaftarWargaPageState extends State<DaftarWargaPage> {
                           _TopNavItem(
                             label: 'Penduduk',
                             active: true,
-                            primary: primary,
+                            primary: getPrimaryColor(context),
                             onTap: () {},
                           ),
                           const SizedBox(width: 8),
                           _TopNavItem(
                             label: 'Rumah',
                             active: false,
-                            primary: primary,
+                            primary: getPrimaryColor(context),
                             onTap: () {},
                           ),
                           const SizedBox(width: 8),
                           _TopNavItem(
                             label: 'Keluarga',
                             active: false,
-                            primary: primary,
+                            primary: getPrimaryColor(context),
                             onTap: () {},
                           ),
                           const SizedBox(width: 8),
                           _TopNavItem(
                             label: 'Penerimaan',
                             active: false,
-                            primary: primary,
+                            primary: getPrimaryColor(context),
                             onTap: () {},
                           ),
                         ],
@@ -336,7 +336,7 @@ class _DaftarWargaPageState extends State<DaftarWargaPage> {
                     final item = _filtered[index];
                     return _WargaCard(
                       item: item,
-                      primary: primary,
+                      primary: getPrimaryColor(context),
                       onTap: () =>
                           context.pushNamed('wargaDetail', extra: item),
                     );
@@ -348,7 +348,7 @@ class _DaftarWargaPageState extends State<DaftarWargaPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: primary,
+        backgroundColor: getPrimaryColor(context),
         onPressed: () => context.pushNamed('wargaAdd'),
         child: const Icon(Icons.add, color: Colors.white),
       ),
