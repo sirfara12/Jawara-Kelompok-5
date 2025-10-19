@@ -7,8 +7,6 @@ class DetailWargaPage extends StatelessWidget {
   final Map<String, String> warga;
   const DetailWargaPage({super.key, required this.warga});
 
-  Color get primary => const Color(0xFF4E46B4);
-
   @override
   Widget build(BuildContext context) {
     final name = warga['name'] ?? '-';
