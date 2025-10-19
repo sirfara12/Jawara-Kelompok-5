@@ -250,72 +250,18 @@ class _DaftarWargaPageState extends State<DaftarWargaPage> {
         elevation: 0,
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
-        title: Row(
-          children: [
-            // IconButton(
-            //   onPressed: () => context.go('/admin/dashboard'),
-            //   icon: const Icon(Icons.chevron_left, color: Colors.black),
-            // ),
-            const SizedBox(width: 8),
-            const Text(
-              'Daftar Warga',
-              style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
+        leading: IconButton(
+          onPressed: () => context.pop(),
+          icon: const Icon(Icons.chevron_left, color: Colors.black),
+        ),
+        title: const Text(
+          'Daftar Warga',
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
       ),
       body: SafeArea(
         child: Column(
           children: [
-            // Top navigation pills
-            Container(
-              color: Colors.white,
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: [
-                          _TopNavItem(
-                            label: 'Penduduk',
-                            active: true,
-                            primary: getPrimaryColor(context),
-                            onTap: () {},
-                          ),
-                          const SizedBox(width: 8),
-                          _TopNavItem(
-                            label: 'Rumah',
-                            active: false,
-                            primary: getPrimaryColor(context),
-                            onTap: () {},
-                          ),
-                          const SizedBox(width: 8),
-                          _TopNavItem(
-                            label: 'Keluarga',
-                            active: false,
-                            primary: getPrimaryColor(context),
-                            onTap: () {},
-                          ),
-                          const SizedBox(width: 8),
-                          _TopNavItem(
-                            label: 'Penerimaan',
-                            active: false,
-                            primary: getPrimaryColor(context),
-                            onTap: () {},
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
             // Search and filter
             _SearchFilterBar(
               controller: _searchController,
@@ -427,54 +373,6 @@ class _SearchFilterBar extends StatelessWidget {
   }
 }
 
-class _TopNavItem extends StatelessWidget {
-  final String label;
-  final bool active;
-  final Color primary;
-  final VoidCallback onTap;
-
-  const _TopNavItem({
-    required this.label,
-    required this.active,
-    required this.primary,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
-        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-        decoration: BoxDecoration(
-          color: active
-              ? const Color.fromRGBO(78, 70, 180, 0.12)
-              : Colors.grey[100],
-          borderRadius: BorderRadius.circular(12),
-          border: active ? Border.all(color: primary) : null,
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              label,
-              style: TextStyle(
-                color: active ? primary : Colors.black87,
-                fontWeight: active ? FontWeight.w600 : FontWeight.w500,
-              ),
-            ),
-            if (active) ...[
-              const SizedBox(width: 8),
-              const Icon(Icons.circle, size: 8, color: Color(0xFF4E46B4)),
-            ],
-          ],
-        ),
-      ),
-    );
-  }
-}
-
 class _WargaCard extends StatelessWidget {
   final Map<String, String> item;
   final Color primary;
@@ -575,7 +473,7 @@ class _StatusChip extends StatelessWidget {
     Color text = Colors.white;
     switch (status.toLowerCase()) {
       case 'aktif':
-        bg = Colors.green;
+        bg = const Color(0xFF4E46B4); // Primary color
         break;
       default:
         bg = Colors.grey.shade300;
@@ -616,7 +514,7 @@ class _LifeChip extends StatelessWidget {
     Color text = Colors.white;
     switch (life.toLowerCase()) {
       case 'hidup':
-        bg = Colors.green;
+        bg = const Color(0xFF4E46B4); // Primary color
         break;
       default:
         bg = Colors.grey.shade300;
