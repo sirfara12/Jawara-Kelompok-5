@@ -7,11 +7,7 @@ class SemuaPengeluaranScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AdminLayout(
-      activeIndex: 2,
-      showBottomNav: true,
-      showBackButton: true,
-      title: 'Semua Pengeluaran',
+    return Scaffold(
       body: Column(
         children: [
           // Header

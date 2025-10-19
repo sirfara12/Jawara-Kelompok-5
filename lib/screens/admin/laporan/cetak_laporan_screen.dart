@@ -14,11 +14,7 @@ class _CetakLaporanScreenState extends State<CetakLaporanScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return AdminLayout(
-      activeIndex: 2,
-      showBottomNav: true,
-      showBackButton: true,
-      title: 'Cetak Laporan',
+    return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [

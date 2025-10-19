@@ -46,11 +46,7 @@ class _KategoriIuranScreenState extends State<KategoriIuranScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return AdminLayout(
-      activeIndex: 2,
-      showBottomNav: true,
-      showBackButton: true,
-      title: 'Kategori Iuran',
+    return Scaffold(
       body: Stack(
         children: [
           Column(

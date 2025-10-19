@@ -36,11 +36,7 @@ class _PemasukanLainTambahScreenState extends State<PemasukanLainTambahScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return AdminLayout(
-      activeIndex: 2,
-      showBottomNav: true,
-      showBackButton: true,
-      title: 'Buat Pemasukan Non Iuran Baru',
+    return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(24),

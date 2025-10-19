@@ -369,11 +369,7 @@ class _PemasukanLainScreenState extends State<PemasukanLainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return AdminLayout(
-      activeIndex: 2,
-      showBottomNav: true,
-      showBackButton: true,
-      title: 'Pemasukan Lain',
+    return Scaffold(
       body: Stack(
         children: [
           Column(

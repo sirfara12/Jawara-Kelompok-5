@@ -6,10 +6,7 @@ class LaporanKeuanganScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AdminLayout(
-      activeIndex: 2, // Keuangan tab
-      title: 'Laporan Keuangan',
-      showBottomNav: true, // Show bottom nav as requested
+    return Scaffold(
       body: Container(
         color: const Color(0xFFF8F9FA),
         child: SingleChildScrollView(
