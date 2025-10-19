@@ -98,12 +98,12 @@ class KeuanganMenuScreen extends StatelessWidget {
                 menuItems: [
                   MenuItem(
                     icon: Icons.trending_down_outlined,
-                    label: 'Semua Pemasukan',
+                    label: 'Pemasukan',
                     onTap: () => context.push('/admin/laporan/semua-pemasukan'),
                   ),
                   MenuItem(
                     icon: Icons.trending_up_outlined,
-                    label: 'Semua Pengeluaran',
+                    label: 'Pengeluaran',
                     onTap: () =>
                         context.push('/admin/laporan/semua-pengeluaran'),
                   ),
@@ -142,27 +142,27 @@ class KeuanganMenuScreen extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: gradientColors[0].withOpacity(0.4),
+              color: gradientColors[0].withValues(alpha: 0.4),
               blurRadius: 20,
               offset: const Offset(0, 10),
             ),
           ],
         ),
-        child: Container(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Header
-              Row(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Header
+            Padding(
+              padding: const EdgeInsets.fromLTRB(24, 24, 24, 0),
+              child: Row(
                 children: [
                   Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.2),
+                      color: Colors.white.withValues(alpha: 0.2),
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(
-                        color: Colors.white.withOpacity(0.3),
+                        color: Colors.white.withValues(alpha: 0.3),
                         width: 1.5,
                       ),
                     ),
@@ -186,7 +186,7 @@ class KeuanganMenuScreen extends StatelessWidget {
                           subtitle,
                           style: TextStyle(
                             fontSize: 13,
-                            color: Colors.white.withOpacity(0.9),
+                            color: Colors.white.withValues(alpha: 0.9),
                             fontWeight: FontWeight.w400,
                           ),
                         ),
@@ -195,30 +195,12 @@ class KeuanganMenuScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 20),
-              // Grid menu items (GoPay style) - Max 4 columns
-              GridView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: menuItems.length < 4 ? menuItems.length : 4,
-                  childAspectRatio: 0.85,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                ),
-                itemCount: menuItems.length,
-                itemBuilder: (context, index) {
-                  final item = menuItems[index];
-                  return _buildGridIconButton(
-                    context,
-                    icon: item.icon,
-                    label: item.label,
-                    onTap: item.onTap,
-                  );
-                },
-              ),
-            ],
-          ),
+            ),
+            const SizedBox(height: 20),
+            // Fixed grid using Rows & Columns for consistent sizes
+            _buildFixedMenuGrid(context, menuItems),
+            const SizedBox(height: 24),
+          ],
         ),
       ),
     );
@@ -238,9 +220,12 @@ class KeuanganMenuScreen extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.2),
+            color: Colors.white.withValues(alpha: 0.2),
             borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: Colors.white.withOpacity(0.3), width: 1),
+            border: Border.all(
+              color: Colors.white.withValues(alpha: 0.3),
+              width: 1,
+            ),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -248,7 +233,7 @@ class KeuanganMenuScreen extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.25),
+                  color: Colors.white.withValues(alpha: 0.25),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Icon(icon, color: Colors.white, size: 24),
@@ -273,6 +258,68 @@ class KeuanganMenuScreen extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  // Build a fixed grid using Column/Row with a stable number of columns
+  // Columns: even item count -> 4, odd -> 3
+  Widget _buildFixedMenuGrid(BuildContext context, List<MenuItem> items) {
+    const double tileWidth = 86;
+    const double tileHeight = 76;
+    const double spacing = 10;
+    final desiredColumns = items.length % 2 == 0 ? 4 : 3;
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final maxWidth = constraints.maxWidth.isFinite
+            ? constraints.maxWidth
+            : desiredColumns * (tileWidth + spacing);
+        final maxColumns = ((maxWidth + spacing) / (tileWidth + spacing))
+            .floor();
+        final columns = desiredColumns.clamp(
+          1,
+          maxColumns > 0 ? maxColumns : 1,
+        );
+        final rows = (items.length / columns).ceil();
+
+        return Column(
+          children: List.generate(rows, (rowIndex) {
+            final startIdx = rowIndex * columns;
+            final itemsRemaining = items.length - startIdx;
+            final rowCount = itemsRemaining < columns
+                ? itemsRemaining
+                : columns;
+
+            return Padding(
+              padding: EdgeInsets.only(
+                bottom: rowIndex == rows - 1 ? 0 : spacing,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(rowCount, (colIndex) {
+                  final idx = startIdx + colIndex;
+                  final child = _buildGridIconButton(
+                    context,
+                    icon: items[idx].icon,
+                    label: items[idx].label,
+                    onTap: items[idx].onTap,
+                  );
+                  return Padding(
+                    padding: EdgeInsets.only(
+                      right: colIndex == rowCount - 1 ? 0 : spacing,
+                    ),
+                    child: SizedBox(
+                      width: tileWidth,
+                      height: tileHeight,
+                      child: child,
+                    ),
+                  );
+                }),
+              ),
+            );
+          }),
+        );
+      },
     );
   }
 }
