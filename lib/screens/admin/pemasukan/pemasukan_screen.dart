@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jawara_pintar_kel_5/models/iuran_model.dart';
 import 'package:jawara_pintar_kel_5/screens/admin/pemasukan/detail_iuran_screen.dart';
 import 'package:jawara_pintar_kel_5/screens/admin/pemasukan/edit_iuran_screen.dart';
+import 'package:jawara_pintar_kel_5/utils.dart';
 
 class PemasukanScreen extends StatefulWidget {
   final int initialTab;
@@ -336,7 +337,7 @@ class _PemasukanScreenState extends State<PemasukanScreen>
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF6366F1).withOpacity(0.1),
+                  color: getPrimaryColor(context).withOpacity(0.1),
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: const Icon(
@@ -376,7 +377,7 @@ class _PemasukanScreenState extends State<PemasukanScreen>
                           margin: const EdgeInsets.only(top: 2),
                           padding: const EdgeInsets.all(6),
                           decoration: BoxDecoration(
-                            color: const Color(0xFF6366F1),
+                            color: getPrimaryColor(context),
                             borderRadius: BorderRadius.circular(6),
                           ),
                           child: const Icon(
@@ -469,7 +470,7 @@ class _PemasukanScreenState extends State<PemasukanScreen>
                 child: ElevatedButton(
                   onPressed: () => Navigator.pop(context),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF6366F1),
+                    backgroundColor: getPrimaryColor(context),
                     padding: const EdgeInsets.symmetric(vertical: 14),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
@@ -613,7 +614,7 @@ class _PemasukanScreenState extends State<PemasukanScreen>
                           );
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF6366F1),
+                          backgroundColor: getPrimaryColor(context),
                           padding: const EdgeInsets.symmetric(vertical: 14),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
@@ -653,11 +654,11 @@ class _PemasukanScreenState extends State<PemasukanScreen>
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: isSelected
-              ? const Color(0xFF6366F1).withOpacity(0.1)
+              ? getPrimaryColor(context).withOpacity(0.1)
               : Colors.grey[50],
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: isSelected ? const Color(0xFF6366F1) : Colors.grey[200]!,
+            color: isSelected ? getPrimaryColor(context) : Colors.grey[200]!,
             width: isSelected ? 2 : 1,
           ),
         ),
@@ -666,7 +667,7 @@ class _PemasukanScreenState extends State<PemasukanScreen>
             Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: isSelected ? const Color(0xFF6366F1) : Colors.grey[300],
+                color: isSelected ? getPrimaryColor(context) : Colors.grey[300],
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Icon(
@@ -682,7 +683,7 @@ class _PemasukanScreenState extends State<PemasukanScreen>
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
-                  color: isSelected ? const Color(0xFF6366F1) : Colors.black87,
+                  color: isSelected ? getPrimaryColor(context) : Colors.black87,
                 ),
               ),
             ),
@@ -875,7 +876,7 @@ class _PemasukanScreenState extends State<PemasukanScreen>
                           );
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF6366F1),
+                          backgroundColor: getPrimaryColor(context),
                           padding: const EdgeInsets.symmetric(vertical: 14),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
