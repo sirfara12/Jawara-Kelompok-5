@@ -38,6 +38,11 @@ dependencies:
   iconify_flutter: ^0.0.7
   auto_size_text: ^3.0.0
   fl_chart: ^1.1.1
+  intl: ^0.19.0
+
+  image_picker: ^1.1.2
+  file_picker: ^8.1.2
+
 
 dev_dependencies:
   flutter_test:
