@@ -24,8 +24,8 @@ import 'package:jawara_pintar_kel_5/screens/admin/penduduk/rumah/edit_rumah.dart
 import 'package:jawara_pintar_kel_5/screens/admin/penduduk/warga/detail_warga.dart';
 import 'package:jawara_pintar_kel_5/screens/admin/penduduk/warga/tambah_warga.dart';
 import 'package:jawara_pintar_kel_5/screens/admin/penduduk/warga/edit_warga.dart';
-import 'package:jawara_pintar_kel_5/screens/admin/keuangan/keuangan_menu_screen.dart';
-import 'package:jawara_pintar_kel_5/screens/admin/pemasukan/pemasukan_screen.dart';
+// import 'package:jawara_pintar_kel_5/screens/admin/keuangan/keuangan_menu_screen.dart';
+// import 'package:jawara_pintar_kel_5/screens/admin/pemasukan/pemasukan_screen.dart';
 import 'package:jawara_pintar_kel_5/screens/admin/lainnya/lainnya_menu_screen.dart';
 import 'package:jawara_pintar_kel_5/screens/admin/lainnya/edit_profile_screen.dart';
 import 'package:jawara_pintar_kel_5/screens/admin/lainnya/manajemen_pengguna_screen.dart';
@@ -212,10 +212,7 @@ final router = GoRouter(
           routes: [
             GoRoute(
               path: '/admin/lainnya',
-              pageBuilder: (context, state) => customTransitionPage(
-                key: state.pageKey,
-                child: const LainnyaScreen(),
-              ),
+              builder: (context, state) => const LainnyaScreen(),
             ),
             GoRoute(
               path: '/admin/lainnya/edit-profile',
