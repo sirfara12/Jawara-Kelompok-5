@@ -20,6 +20,17 @@ class _LoginScreenState extends State<LoginScreen> {
 
   final _loginFormHeight = 350.0;
 
+  void _setShowLoginForm(bool value) {
+    if (!mounted) return;
+    if (!value) {
+      // hide keyboard when form is hidden
+      FocusScope.of(context).unfocus();
+    }
+    setState(() => _showLoginForm = value);
+  }
+
+  void _toggleLoginForm() => _setShowLoginForm(!_showLoginForm);
+
   @override
   Widget build(BuildContext context) {
     final backgroundColor = Theme.of(context).scaffoldBackgroundColor;
@@ -61,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ? max(mascoutHeight - _loginFormHeight / 2, 50)
                           : mascoutHeight,
                       child: GestureDetector(
-                        onTap: () => setState(() => _showLoginForm = false),
+                        onTap: () => _setShowLoginForm(false),
                         child: Image.asset("assets/login_banner.webp"),
                       ),
                     ),
@@ -130,9 +141,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         loginUntukMengakses(),
                                         LoginButton(
                                           text: "Login",
-                                          onTap: () => setState(() {
-                                            _showLoginForm = !_showLoginForm;
-                                          }),
+                                          onTap: _toggleLoginForm,
                                         ),
                                         LoginButton(
                                           text: "Daftar",
@@ -206,9 +215,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                   LoginButton(
                                     text: "Login",
-                                    onTap: () => setState(() {
-                                      context.go('/admin/dashboard');
-                                    }),
+                                    onTap: () => context.go('/admin/dashboard'),
                                   ),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
