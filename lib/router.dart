@@ -316,6 +316,7 @@ final router = GoRouter(
             ),
             GoRoute(
               path: '/admin/lainnya/edit-profile',
+              name: 'editProfile',
               builder: (context, state) => const EditProfileScreen(),
             ),
             GoRoute(

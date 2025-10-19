@@ -74,7 +74,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
                             shape: const CircleBorder(),
                             clipBehavior: Clip.antiAlias,
                             child: InkWell(
-                              onTap: () => context.goNamed('login'),
+                              onTap: () => context.pushNamed('editProfile'),
                               child: const SizedBox(
                                 width: 44,
                                 height: 44,
