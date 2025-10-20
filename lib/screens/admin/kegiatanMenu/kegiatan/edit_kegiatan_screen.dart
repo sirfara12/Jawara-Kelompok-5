@@ -358,7 +358,7 @@ class _EditKegiatanScreenState extends State<EditKegiatanScreen> {
                   ElevatedButton(
                     onPressed: _simpanPerubahan,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: primaryColor,
+                      backgroundColor: const Color.fromARGB(255, 106, 63, 181),
                       foregroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8.0),
