@@ -115,7 +115,10 @@ class _PesanWargaScreenState extends State<PesanWargaScreen> {
               onPressed: () => Navigator.of(dialogContext).pop(),
               style: TextButton.styleFrom(
                 foregroundColor: Colors.black54,
-                backgroundColor: Colors.grey.shade200,
+                backgroundColor: Colors.grey.shade400,
+                shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8), 
+              ),
               ),
               child: const Text('Batal'),
             ),
@@ -133,6 +136,9 @@ class _PesanWargaScreenState extends State<PesanWargaScreen> {
               style: TextButton.styleFrom(
                 backgroundColor: Colors.deepPurple,
                 foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
               ),
               child: const Text('Hapus'),
             ),
@@ -343,14 +349,6 @@ class _PesanWargaScreenState extends State<PesanWargaScreen> {
                   ),
           ),
         ],
-      ),
-      // ❇️ Floating Action Button
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-        },
-        backgroundColor: primaryColor,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-        child: const Icon(Icons.add, color: Colors.white, size: 30),
       ),
     );
   }

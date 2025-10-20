@@ -248,7 +248,7 @@ class _TambahBroadcastScreenState extends State<TambahBroadcastScreen> {
                   ElevatedButton(
                     onPressed: _simpanBroadcast,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: primaryColor,
+                      backgroundColor: const Color.fromARGB(255, 106, 63, 181),
                       foregroundColor: Colors.white,
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),

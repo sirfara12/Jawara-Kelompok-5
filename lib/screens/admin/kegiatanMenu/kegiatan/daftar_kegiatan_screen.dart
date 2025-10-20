@@ -104,8 +104,6 @@ class _DaftarKegiatanScreenState extends State<DaftarKegiatanScreen> {
     return result.toList();
   }
 
-  // =========================== NAVIGASI =====================================
-
   void _showFilterModal(BuildContext context) async {
     final result = await showModalBottomSheet<Map<String, dynamic>?>(
       context: context,
@@ -205,54 +203,64 @@ class _DaftarKegiatanScreenState extends State<DaftarKegiatanScreen> {
 
     showDialog(
       context: context,
-      builder: (_) {
-        return AlertDialog(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-          title: const Text(
-            'Konfirmasi Hapus',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.deepPurple,
-            ),
+      builder: (BuildContext dialogContext) {
+      return AlertDialog(
+        backgroundColor: Colors.white, 
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        title: const Text(
+          'Konfirmasi Hapus',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.black, 
           ),
-          content: Text(
-              'Apakah kamu yakin ingin menghapus kegiatan "$judulKegiatan"? Aksi ini tidak dapat dibatalkan.'),
-          actionsAlignment: MainAxisAlignment.center,
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              style: TextButton.styleFrom(
-                foregroundColor: Colors.black54,
-                backgroundColor: Colors.grey.shade200,
+        ),
+        content: Text(
+          'Apakah kamu yakin ingin menghapus kegiatan "$judulKegiatan"? Aksi ini tidak dapat dibatalkan.',
+          // Teks konten diubah menjadi gelap
+          style: const TextStyle(color: Colors.black87), 
+        ),
+        actionsAlignment: MainAxisAlignment.end,
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(dialogContext).pop(),
+            style: TextButton.styleFrom(
+              backgroundColor: Colors.grey.shade400, 
+              foregroundColor: Colors.black87,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
               ),
-              child: const Text('Batal'),
             ),
-            TextButton(
-              onPressed: () {
-                setState(() {
-                  _kegiatanList.removeAt(index);
-                });
-                Navigator.pop(context);
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content:
-                        Text('Kegiatan "$judulKegiatan" berhasil dihapus!'),
-                    backgroundColor: Colors.red.shade600,
-                  ),
-                );
-              },
-              style: TextButton.styleFrom(
-                backgroundColor: Colors.red.shade600,
-                foregroundColor: Colors.white,
+            child: const Text('Batal'),
+          ),
+          const SizedBox(width: 8),
+          TextButton(
+            onPressed: () {
+              setState(() {
+                _kegiatanList.removeAt(index);
+              });
+              Navigator.of(dialogContext).pop();
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('Kegiatan "$judulKegiatan" berhasil dihapus!'),
+                  backgroundColor: Colors.grey.shade800,
+                ),
+              );
+            },
+            style: TextButton.styleFrom(
+              // **Tombol Hapus:** Latar Ungu, Teks Putih (Sesuai dengan gambar)
+              backgroundColor: Colors.deepPurple, 
+              foregroundColor: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
               ),
-              child: const Text('Hapus'),
             ),
-          ],
-        );
-      },
-    );
-  }
+            child: const Text('Hapus'),
+          ),
+        ],
+      );
+    },
+  );
+}
   @override
   Widget build(BuildContext context) {
     final filteredList = _filterKegiatan();

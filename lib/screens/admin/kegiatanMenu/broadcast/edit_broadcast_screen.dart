@@ -139,7 +139,7 @@ class _EditBroadcastScreenState extends State<EditBroadcastScreen> {
                   ElevatedButton(
                     onPressed: _saveChanges,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: primaryColor, 
+                      backgroundColor: const Color.fromARGB(255, 106, 63, 181), 
                       foregroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                       shape: RoundedRectangleBorder(

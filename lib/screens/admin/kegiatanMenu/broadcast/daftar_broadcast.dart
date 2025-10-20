@@ -187,7 +187,7 @@ class _DaftarBroadcastScreenState extends State<DaftarBroadcastScreen> {
               },
               style: TextButton.styleFrom(
                 foregroundColor: Colors.black54,
-                backgroundColor: Colors.grey.shade200,
+                backgroundColor: Colors.grey.shade400,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
@@ -318,7 +318,7 @@ class _DaftarBroadcastScreenState extends State<DaftarBroadcastScreen> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 4),              
+              const SizedBox(height: 4),
               Row(
                 children: [
                   Text(
